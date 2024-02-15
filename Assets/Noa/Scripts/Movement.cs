@@ -5,15 +5,50 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private float gravity = 2f;
-    void Update()
+    [SerializeField] private float jumpForce;
+    private Rigidbody rb;
+    private bool onGround;
+
+
+    private void Start()
     {
-        if (Input.GetKey("a")) transform.position = transform.position - new Vector3(1, 0, 0) * speed * Time.deltaTime;
-        if (Input.GetKey("d")) transform.position = transform.position + new Vector3(1, 0, 0) * speed * Time.deltaTime;
-        transform.position = transform.position - new Vector3(0, gravity, 0) * Time.deltaTime;
+        rb = GetComponent<Rigidbody>();
     }
-    private void OnCollisionEnter(Collision other)
+    void FixedUpdate()
     {
-        transform.position = transform.position + new Vector3(0,(transform.position.y-other.transform.position.y)/ 2, 0);
+        Debug.Log("Grounded = " + onGround);
+        if (Input.GetKey("a")) 
+        {
+            transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
+            rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        }
+        if (Input.GetKey("d")) 
+        {
+            transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
+            rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        }
+        if (Input.GetKey(KeyCode.Space) && onGround == true)
+        {
+            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+            onGround = false;
+        }
+
+        if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.position.y+1 < transform.position.y)
+        {
+            onGround = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision) 
+    {
+        onGround = false; 
     }
 }
