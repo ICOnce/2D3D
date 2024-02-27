@@ -44,6 +44,7 @@ public class Movement : MonoBehaviour
         
         if (dir == "XZ")
         {
+            onGround = true;
             if (Input.GetKey("a"))
             {
                 transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
@@ -54,13 +55,13 @@ public class Movement : MonoBehaviour
                 transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
                 rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
-            if (Input.GetKey("w"))
+            if (Input.GetKey("s"))
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
                 rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
 
-            if (Input.GetKey("s"))
+            if (Input.GetKey("w"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
                 rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
