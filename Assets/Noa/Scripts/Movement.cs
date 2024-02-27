@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     private Rigidbody rb;
     private bool onGround;
 
+    public string dir;
+
 
     private void Start()
     {
@@ -16,26 +18,81 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log("Grounded = " + onGround);
-        if (Input.GetKey("a")) 
+        if (dir == "XY")
         {
-            transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
-            rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            if (Input.GetKey("a"))
+            {
+                transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey("d"))
+            {
+                transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey(KeyCode.Space) && onGround == true)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+                onGround = false;
+            }
+
+            if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
         }
-        if (Input.GetKey("d")) 
+        
+        if (dir == "XZ")
         {
-            transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
-            rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-        }
-        if (Input.GetKey(KeyCode.Space) && onGround == true)
-        {
-            rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
-            onGround = false;
+            if (Input.GetKey("a"))
+            {
+                transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey("d"))
+            {
+                transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey("w"))
+            {
+                transform.rotation = new Quaternion(0, 1, 0, 0);
+                onGround = false;
+            }
+
+            if (Input.GetKey("s"))
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 1);
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
+            if ((!(Input.GetKey("a") || Input.GetKey("d"))) || Input.GetKey("w") || Input.GetKey("s") && onGround == true)
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
         }
 
-        if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
+        if (dir == "ZY")
         {
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            if (Input.GetKey("a"))
+            {
+                transform.rotation = new Quaternion(0, 1, 0, 0);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey("d"))
+            {
+                transform.rotation = new Quaternion(0, 0, 0, 1);
+                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey(KeyCode.Space) && onGround == true)
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+                onGround = false;
+            }
+
+            if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
+            {
+                rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
         }
     }
 
