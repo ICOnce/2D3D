@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 52500353}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalPosition: {x: 0, y: 500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -218,9 +218,10 @@ GameObject:
   - component: {fileID: 370873804}
   - component: {fileID: 370873803}
   - component: {fileID: 370873802}
+  - component: {fileID: 370873806}
   m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +233,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370873801}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e62a7aa389680eb48bffc202d43ff83a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -311,6 +312,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &370873806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370873801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbc2aadf29a38e4598069f50ab6b2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prevTrans: {fileID: 0}
+  cordX: 0
+  cordY: 0
+  cordZ: 0
+  scalX: 0
+  scalY: 0
+  scalZ: 0
 --- !u!1 &437798054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 469608460073333128, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
@@ -327,6 +347,14 @@ PrefabInstance:
     - target: {fileID: 469608460073333128, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
+      propertyPath: jumpForce
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4436629397912281146, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -592,7 +620,7 @@ Transform:
   m_GameObject: {fileID: 1200879112}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 50, y: 1, z: 0}
+  m_LocalPosition: {x: 500, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -610,9 +638,10 @@ GameObject:
   - component: {fileID: 1314947767}
   - component: {fileID: 1314947766}
   - component: {fileID: 1314947765}
+  - component: {fileID: 1314947769}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Platform
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -624,7 +653,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1314947764}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e62a7aa389680eb48bffc202d43ff83a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -703,6 +732,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314947769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314947764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbc2aadf29a38e4598069f50ab6b2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prevTrans: {fileID: 0}
+  cordX: 0
+  cordY: 0
+  cordZ: 0
+  scalX: 0
+  scalY: 0
+  scalZ: 0
 --- !u!1 &1385881886
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +828,7 @@ Transform:
   m_GameObject: {fileID: 1385881886}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -50}
+  m_LocalPosition: {x: 0, y: 1, z: -500}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
