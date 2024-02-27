@@ -108,4 +108,9 @@ public class Movement : MonoBehaviour
     {
         onGround = false; 
     }
+
+    public void SetDir(string direction)
+    {
+        dir = direction;
+    }
 }
