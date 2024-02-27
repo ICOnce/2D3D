@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    private float speed;
+    public float baseSpeed;
     [SerializeField] private float jumpForce;
     private Rigidbody rb;
     private bool onGround;
-
+    
     public string dir;
 
 
@@ -18,6 +19,12 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!onGround)
+        {
+            speed = baseSpeed / 2;
+        }
+        else speed = baseSpeed;
+
         if (dir == "XY")
         {
             if (Input.GetKey("a"))
