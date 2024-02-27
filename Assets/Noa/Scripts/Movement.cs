@@ -73,7 +73,7 @@ public class Movement : MonoBehaviour
                 transform.rotation = new Quaternion(0, 0, 0, 1);
                 rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
             }
-            if ((!(Input.GetKey("a") || Input.GetKey("d"))) || Input.GetKey("w") || Input.GetKey("s") && onGround == true)
+            if ((!(Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
