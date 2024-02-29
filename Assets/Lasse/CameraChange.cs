@@ -32,12 +32,13 @@ public class CameraChange : MonoBehaviour
                 Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3 (prevData.localScale.x, prevData.localScale.y, 500);
             }
-            ray = new Ray(playah.transform.position,new Vector3(playah.transform.position.x, playah.transform.position.y-1, playah.transform.position.z));
+            ray = new Ray(playah.transform.position,new Vector3(0, -1, 0));
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
                 Debug.Log("hit!");
-                //Transform temp = hit.collider.gameObject.transform;
-                //playah.transform.position = new Vector3(playah.transform.position.x, temp.position.y+(0.5f*temp.localScale.y)+(0.51f*playah.transform.localScale.y), playah.transform.position.z);
+                Transform temp = hit.collider.gameObject.transform;
+                playah.transform.position = new Vector3(playah.transform.position.x, temp.position.y+(0.5f*temp.localScale.y)+(0.51f*playah.transform.localScale.y), playah.transform.position.z);
+                Debug.Log(temp.name);
             }
         }
         else if (Input.GetKey("2") && CamDir != "camXZ")
