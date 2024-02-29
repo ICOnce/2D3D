@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class CameraChange : MonoBehaviour
@@ -7,6 +8,12 @@ public class CameraChange : MonoBehaviour
     private string CamDir;
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject playah;
+    Ray ray;
+    float maxDistance = 1000;
+    private void Start()
+    {
+        ray = new Ray(transform.position, transform.forward);
+    }
     void Update()
     {
         if (Input.GetKey("1") && CamDir != "camXY")
@@ -17,13 +24,20 @@ public class CameraChange : MonoBehaviour
             CamDir ="camXY";
             playah.GetComponent<Movement>().dir = "XY";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
+            playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             foreach (GameObject Platform in PlatList)
             {
-                playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
                 Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
                 Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
                 Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3 (prevData.localScale.x, prevData.localScale.y, 500);
+            }
+            ray = new Ray(playah.transform.position,new Vector3(playah.transform.position.x, playah.transform.position.y-1, playah.transform.position.z));
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+            {
+                Debug.Log("hit!");
+                //Transform temp = hit.collider.gameObject.transform;
+                //playah.transform.position = new Vector3(playah.transform.position.x, temp.position.y+(0.5f*temp.localScale.y)+(0.51f*playah.transform.localScale.y), playah.transform.position.z);
             }
         }
         else if (Input.GetKey("2") && CamDir != "camXZ")
@@ -59,5 +73,9 @@ public class CameraChange : MonoBehaviour
                 playah.GetComponent<Transform>().position = new Vector3 (playah.GetComponent<Transform>().position.x, 1.5f, playah.GetComponent<Transform>().position.z);
             }
         }
+    }
+    void CheckForColliders()
+    {
+
     }
 }
