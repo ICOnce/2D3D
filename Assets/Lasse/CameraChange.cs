@@ -13,13 +13,15 @@ public class CameraChange : MonoBehaviour
     Ray ray, rayD, rayW, rayE, rayN, rayS, rayU;
     float maxDistance = 1000;
     private Vector3 Down = new Vector3(0, -1, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
+    public Transform fakePlayer;
+    private string TempDir;
     private void Start()
     {
 
     }
     void Update()
     {
-
+        fakePlayer.transform.position = playah.transform.position + new Vector3(500, 0, 500);
         camXY.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, playah.transform.position.y, -500);
         camXZ.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, 500, playah.transform.position.z);
         camYZ.GetComponent<Transform>().position = new Vector3(500, playah.transform.position.y, playah.transform.position.z);
@@ -48,15 +50,17 @@ public class CameraChange : MonoBehaviour
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
         {
+            CamDir = "camXZ";
             Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "YZ") == false)
+            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XZ") == false)
             {
+
                 return;
             }
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
-            CamDir = "camXZ";
+            
             playah.GetComponent<Movement>().dir = "XZ";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             Debug.Log(PlatList.Length);
