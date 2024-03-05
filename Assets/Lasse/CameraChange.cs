@@ -14,13 +14,14 @@ public class CameraChange : MonoBehaviour
     float maxDistance = 1000;
     private Vector3 Down = new Vector3(0, -1, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
     public Transform fakePlayer;
-    private string TempDir;
+    private string PrevDir;
     private void Start()
     {
 
     }
     void Update()
     {
+        PrevDir = CamDir;
         fakePlayer.transform.position = playah.transform.position + new Vector3(500, 0, 500);
         camXY.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, playah.transform.position.y, -500);
         camXZ.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, 500, playah.transform.position.z);
@@ -38,7 +39,7 @@ public class CameraChange : MonoBehaviour
             CamDir ="camXY";
             playah.GetComponent<Movement>().dir = "XY";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-            playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
+            if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             foreach (GameObject Platform in PlatList)
             {
                 Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
@@ -50,20 +51,17 @@ public class CameraChange : MonoBehaviour
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
         {
-            CamDir = "camXZ";
             Transform PlayerTemp = playah.transform;
             if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XZ") == false)
             {
-
                 return;
             }
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
-            
+            CamDir = "camXZ";
             playah.GetComponent<Movement>().dir = "XZ";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-            Debug.Log(PlatList.Length);
             foreach (GameObject Platform in PlatList)
             {
                 Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
@@ -84,7 +82,7 @@ public class CameraChange : MonoBehaviour
             camYZ.enabled = true;
             CamDir = "camYZ";
             playah.GetComponent<Movement>().dir = "ZY";
-            playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
+            if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             foreach (GameObject Platform in PlatList)
             {
@@ -93,7 +91,7 @@ public class CameraChange : MonoBehaviour
                 Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3(500, prevData.localScale.y, prevData.localScale.z);
             }
-            Invoke("GetTheHeight", 0.05f);
+            if (PrevDir == "camXZ") Invoke("GetTheHeight", 0.05f);
         }
     }
     private bool CheckForCollider(Vector3 X, string camDir)
@@ -130,7 +128,7 @@ public class CameraChange : MonoBehaviour
     }
     private void GetTheHeight()
     {
-        ray = new Ray(playah.transform.position, new Vector3(0, -1, 0));
+        ray = new Ray(playah.transform.position + new Vector3 (500, 0, 500), new Vector3(0, -1, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
         {
             Transform temp = hit.collider.gameObject.transform;
