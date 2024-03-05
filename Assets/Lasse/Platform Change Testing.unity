@@ -354,11 +354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: baseSpeed
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: jumpForce
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4436629397912281146, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -398,18 +398,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4436629397912281146, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109978396778140333, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
-      propertyPath: m_Drag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109978396778140333, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
-      propertyPath: m_Mass
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109978396778140333, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
-      propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
