@@ -116,10 +116,6 @@ public class Movement : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
-    }
     public void SetDir(string direction)
     {
         dir = direction;
