@@ -37,7 +37,7 @@ public class CameraChange : MonoBehaviour
             camXZ.enabled = false;
             camYZ.enabled = false;
             CamDir ="camXY";
-            playah.GetComponent<Movement>().dir = "XY";
+            
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             foreach (GameObject Platform in PlatList)
@@ -67,7 +67,7 @@ public class CameraChange : MonoBehaviour
                 Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
                 Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3(prevData.localScale.x, 1, prevData.localScale.z);
-                Platform.GetComponent<Transform>().position = new Vector3(prevData.position.x, 0, prevData.position.z);
+                Platform.GetComponent<Transform>().position = new Vector3(prevData.position.x, playah.transform.position.y-1, prevData.position.z);
             }
         }
         else if (Input.GetKeyDown("3") && CamDir != "camYZ")
@@ -94,9 +94,14 @@ public class CameraChange : MonoBehaviour
             if (PrevDir == "camXZ") Invoke("GetTheHeight", 0.05f);
         }
     }
-    private bool CheckForCollider(Vector3 X, string camDir)
+    private bool CheckForCollider(Vector3 X, string newCamDir)
     {
-        if (camDir == "XY")
+        if (CamDir == "camXZ")
+        {
+            ray = new Ray(X + new Vector3(0,500,0), Down);
+            if (Physics.Raycast(ray, out RaycastHit hit)) X = hit.point + new Vector3(0,1,0);
+        }
+        if (newCamDir == "XY")
         {
             rayD = new Ray(X, Down);
             rayE = new Ray(X, East);
@@ -106,7 +111,7 @@ public class CameraChange : MonoBehaviour
                 return true;
             }
         }
-        if (camDir == "XZ")
+        if (newCamDir == "XZ")
         {
             rayD = new Ray(X, Down);
             rayU = new Ray(X, Up);
@@ -115,7 +120,7 @@ public class CameraChange : MonoBehaviour
                 return true;
             }
         }
-        if (camDir == "YZ")
+        if (newCamDir == "YZ")
         {
             rayD = new Ray(X, Down);
             rayN = new Ray(X, North);
