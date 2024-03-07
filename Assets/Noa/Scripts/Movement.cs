@@ -12,13 +12,24 @@ public class Movement : MonoBehaviour
     
     public string dir;
 
-
+    private Ray ray;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
     {
+        ray = new Ray(transform.position, -transform.up);
+        Debug.DrawRay(transform.position, -transform.up, Color.red);
+        if (Physics.Raycast(ray, 1.1f)) 
+        {
+            Debug.Log("Grounded");
+            onGround = true;
+        } else
+        {
+            onGround = false;
+            Debug.Log("Not Grounded");
+        }
         if (!onGround)
         {
             speed = baseSpeed / 2;
@@ -104,19 +115,11 @@ public class Movement : MonoBehaviour
         }
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.position.y+1 < transform.position.y)
-        {
-            onGround = true;
-        }
+        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
     }
-
-    private void OnCollisionExit(Collision collision) 
-    {
-        onGround = false; 
-    }
-
     public void SetDir(string direction)
     {
         dir = direction;
