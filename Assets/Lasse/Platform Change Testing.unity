@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -752,11 +752,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: baseSpeed
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 994285319727029037, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: jumpForce
-      value: 13
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4436629397912281146, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_LocalPosition.x
@@ -804,12 +804,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 117e6b0b004ed614394559f0aa1e5512, type: 2}
     - target: {fileID: 6109978396778140333, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_Drag
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6109978396778140333, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
       propertyPath: m_Mass
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7190000082894544729, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e62a7aa389680eb48bffc202d43ff83a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
