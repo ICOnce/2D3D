@@ -29,15 +29,12 @@ public class CameraChange : MonoBehaviour
         if (Input.GetKeyDown("1") && CamDir != "camXY")
         {
             Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XY") == false)
-            {
-                return;
-            }
+            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XY") == false) return;
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
             CamDir ="camXY";
-            
+            playah.GetComponent<Movement>().dir = "XY";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             foreach (GameObject Platform in PlatList)
@@ -47,15 +44,12 @@ public class CameraChange : MonoBehaviour
                 Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3 (prevData.localScale.x, prevData.localScale.y, 500);
             }
-            Invoke("GetTheHeight", 0.05f) ;
+            if (PrevDir == "camXZ") GetTheHeight();
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
         {
             Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XZ") == false)
-            {
-                return;
-            }
+            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
@@ -73,10 +67,7 @@ public class CameraChange : MonoBehaviour
         else if (Input.GetKeyDown("3") && CamDir != "camYZ")
         {
             Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "YZ") == false)
-            {   
-                return;
-            }
+            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "YZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = false;
             camYZ.enabled = true;
@@ -91,7 +82,7 @@ public class CameraChange : MonoBehaviour
                 Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
                 Platform.GetComponent<Transform>().localScale = new Vector3(500, prevData.localScale.y, prevData.localScale.z);
             }
-            if (PrevDir == "camXZ") Invoke("GetTheHeight", 0.05f);
+            if (PrevDir == "camXZ") GetTheHeight();
         }
     }
     private bool CheckForCollider(Vector3 X, string newCamDir)
@@ -107,8 +98,24 @@ public class CameraChange : MonoBehaviour
             rayE = new Ray(X, East);
             rayW = new Ray(X, West);
             if (Physics.Raycast(rayD) && !Physics.Raycast(rayE) && !Physics.Raycast(rayW))
-            {
+            {               
                 return true;
+            }
+            else if (Physics.Raycast(rayE) || Physics.Raycast(rayW))
+            {
+                return false;
+            }
+            Debug.Log(CamDir);
+            if (CamDir == "camYZ")
+            {
+                Debug.Log("boobs");
+                X += new Vector3(0, -1.5f, 0);
+                rayE = new Ray(X, East);
+                rayW = new Ray(X, West);
+                if (Physics.Raycast(rayE) || Physics.Raycast(rayW))
+                {
+                    return true;
+                }
             }
         }
         if (newCamDir == "XZ")
@@ -125,8 +132,25 @@ public class CameraChange : MonoBehaviour
             rayD = new Ray(X, Down);
             rayN = new Ray(X, North);
             rayS = new Ray(X, South);
-            if (Physics.Raycast(rayD) && !Physics.Raycast(rayN) && !Physics.Raycast(rayS)) {
+            if (Physics.Raycast(rayD) && !Physics.Raycast(rayN) && !Physics.Raycast(rayS))
+            {
                 return true;
+            }
+            else if (Physics.Raycast(rayN) || Physics.Raycast(rayS))
+            {
+                return false;
+            }
+            Debug.Log(CamDir);
+            if (CamDir == "camXY")
+            {
+                Debug.Log("boobs");
+                X += new Vector3(0, -1.5f, 0);
+                rayN = new Ray(X, North);
+                rayS = new Ray(X, South);
+                if (Physics.Raycast(rayN) || Physics.Raycast(rayS))
+                {
+                    return true;
+                }
             }
         }
         return false;
