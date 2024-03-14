@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
         }
         if (!onGround)
         {
-            speed = baseSpeed / 2;
+            speed = baseSpeed;
         }
         else speed = baseSpeed;
 
@@ -41,16 +41,16 @@ public class Movement : MonoBehaviour
             if (Input.GetKey("a"))
             {
                 transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(-speed, rb.velocity.y, rb.velocity.z);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(speed, rb.velocity.y, rb.velocity.z);
             }
             if (Input.GetKey(KeyCode.Space) && onGround == true)
             {
-                rb.AddForce(transform.up * jumpForce, ForceMode.VelocityChange);
+                rb.velocity = transform.up * jumpForce;
                 onGround = false;
             }
 
@@ -66,23 +66,23 @@ public class Movement : MonoBehaviour
             if (Input.GetKey("a"))
             {
                 transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(-speed, rb.velocity.y, 0);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(speed, rb.velocity.y, 0);
             }
             if (Input.GetKey("s"))
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(0, rb.velocity.y, -speed);
             }
 
             if (Input.GetKey("w"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(0, rb.velocity.y, speed);
             }
             if ((!(Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s"))) && onGround == true)
             {
@@ -95,12 +95,12 @@ public class Movement : MonoBehaviour
             if (Input.GetKey("a"))
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -speed);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
-                rb.AddForce(transform.forward * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed);
             }
             if (Input.GetKey(KeyCode.Space) && onGround == true)
             {
@@ -116,10 +116,6 @@ public class Movement : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
-    }
     public void SetDir(string direction)
     {
         dir = direction;
