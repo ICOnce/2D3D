@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07cf83625b6b20c44a9e4048470c855c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 13
-  jumpForce: 6
+  baseSpeed: 9
+  jumpForce: 8
   dir: 
 --- !u!54 &6109978396778140333
 Rigidbody:
