@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
+ 
         ray = new Ray(transform.position, -transform.up);
         Debug.DrawRay(transform.position, -transform.up, Color.red);
         if (Physics.Raycast(ray, 1.1f)) 
@@ -32,7 +33,7 @@ public class Movement : MonoBehaviour
         }
         if (!onGround)
         {
-            speed = baseSpeed;
+            speed = baseSpeed / 1.2f;
         }
         else speed = baseSpeed;
 
@@ -57,6 +58,10 @@ public class Movement : MonoBehaviour
             if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
+            else if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround != true) 
+            {
+                rb.velocity = new Vector3(rb.velocity.x * 0.96f , rb.velocity.y, rb.velocity.z * 0.96f);
             }
         }
         
@@ -111,6 +116,10 @@ public class Movement : MonoBehaviour
             if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+            }
+            else if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround != true)
+            {
+                rb.velocity = new Vector3(rb.velocity.x * 0.96f, rb.velocity.y, rb.velocity.z * 0.96f);
             }
         }
     }
