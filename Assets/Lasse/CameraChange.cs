@@ -10,11 +10,12 @@ public class CameraChange : MonoBehaviour
     private string CamDir;
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject playah;
-    Ray ray, rayD, rayW, rayE, rayN, rayS, rayU;
+    Ray ray, rayD1, rayD2, rayD3, rayD4, rayW1, rayW2, rayE1, rayE2, rayN1, rayN2, rayS1, rayS2, rayU1, rayU2, rayU3, rayU4;
     float maxDistance = 1000;
     private Vector3 Down = new Vector3(0, -1, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
     public Transform fakePlayer;
     private string PrevDir;
+    private Vector3 NE = new Vector3(0.5f,-0.99f,0.5f), NW = new Vector3(0.5f, -0.99f, -0.5f), SE = new Vector3(-0.5f, -0.99f, 0.5f), SW = new Vector3(-0.5f, -0.99f, -0.5f);
     private void Start()
     {
 
@@ -23,9 +24,6 @@ public class CameraChange : MonoBehaviour
     {
         PrevDir = CamDir;
         fakePlayer.transform.position = playah.transform.position + new Vector3(500, 0, 500);
-        camXY.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, playah.transform.position.y, -500);
-        camXZ.GetComponent<Transform>().position = new Vector3(playah.transform.position.x, 500, playah.transform.position.z);
-        camYZ.GetComponent<Transform>().position = new Vector3(500, playah.transform.position.y, playah.transform.position.z);
         if (Input.GetKeyDown("1") && CamDir != "camXY")
         {
             Transform PlayerTemp = playah.transform;
@@ -35,6 +33,7 @@ public class CameraChange : MonoBehaviour
             camYZ.enabled = false;
             CamDir ="camXY";
             playah.GetComponent<Movement>().dir = "XY";
+            CameraMovement.ActiveCam = "XY";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             foreach (GameObject Platform in PlatList)
@@ -55,6 +54,7 @@ public class CameraChange : MonoBehaviour
             camYZ.enabled = false;
             CamDir = "camXZ";
             playah.GetComponent<Movement>().dir = "XZ";
+            CameraMovement.ActiveCam = "XZ";
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             foreach (GameObject Platform in PlatList)
             {
@@ -73,6 +73,7 @@ public class CameraChange : MonoBehaviour
             camYZ.enabled = true;
             CamDir = "camYZ";
             playah.GetComponent<Movement>().dir = "ZY";
+            CameraMovement.ActiveCam = "YZ";
             if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
             GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
             foreach (GameObject Platform in PlatList)
@@ -94,25 +95,30 @@ public class CameraChange : MonoBehaviour
         }
         if (newCamDir == "XY")
         {
-            rayD = new Ray(X, Down);
-            rayE = new Ray(X, East);
-            rayW = new Ray(X, West);
-            if (Physics.Raycast(rayD) && !Physics.Raycast(rayE) && !Physics.Raycast(rayW))
+            rayD1 = new Ray(X + NE, Down);
+            rayD2 = new Ray(X + NW, Down);
+            rayD3 = new Ray(X + SE, Down);
+            rayD4 = new Ray(X + SW, Down);
+            rayE1 = new Ray(X + SE, East);
+            rayE2 = new Ray(X + NE, East);
+            rayW1 = new Ray(X + SW, West);
+            rayW2 = new Ray(X + NW, West);
+            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayE1) && !Physics.Raycast(rayE2) && !Physics.Raycast(rayW1) && !Physics.Raycast(rayW2))
             {               
                 return true;
             }
-            else if (Physics.Raycast(rayE) || Physics.Raycast(rayW))
+            else if (Physics.Raycast(rayE1) || Physics.Raycast(rayW1))
             {
                 return false;
             }
-            Debug.Log(CamDir);
             if (CamDir == "camYZ")
             {
-                Debug.Log("boobs");
                 X += new Vector3(0, -1.5f, 0);
-                rayE = new Ray(X, East);
-                rayW = new Ray(X, West);
-                if (Physics.Raycast(rayE) || Physics.Raycast(rayW))
+                rayE1 = new Ray(X + SE, East);
+                rayE2 = new Ray(X + NE, East);
+                rayW1 = new Ray(X + SW, West);
+                rayW2 = new Ray(X + NW, West);
+                if (Physics.Raycast(rayE1) || Physics.Raycast(rayE2) || Physics.Raycast(rayW1) || Physics.Raycast(rayW2))
                 {
                     return true;
                 }
@@ -120,34 +126,45 @@ public class CameraChange : MonoBehaviour
         }
         if (newCamDir == "XZ")
         {
-            rayD = new Ray(X, Down);
-            rayU = new Ray(X, Up);
-            if (Physics.Raycast(rayD) && !Physics.Raycast(rayU))
+            rayD1 = new Ray(X + NE, Down);
+            rayD2 = new Ray(X + NW, Down);
+            rayD3 = new Ray(X + SE, Down);
+            rayD4 = new Ray(X + SW, Down);
+            rayU1 = new Ray(X + NE, Up);
+            rayU2 = new Ray(X + NW, Up);
+            rayU3 = new Ray(X + SE, Up);
+            rayU4 = new Ray(X + SW, Up);
+            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayU1) && !Physics.Raycast(rayU2) && !Physics.Raycast(rayU3) && !Physics.Raycast(rayU4))
             {
                 return true;
             }
         }
         if (newCamDir == "YZ")
         {
-            rayD = new Ray(X, Down);
-            rayN = new Ray(X, North);
-            rayS = new Ray(X, South);
-            if (Physics.Raycast(rayD) && !Physics.Raycast(rayN) && !Physics.Raycast(rayS))
+            rayD1 = new Ray(X + NE, Down);
+            rayD2 = new Ray(X + NW, Down);
+            rayD3 = new Ray(X + SE, Down);
+            rayD4 = new Ray(X + SW, Down);
+            rayN1 = new Ray(X + NE, North);
+            rayN2 = new Ray(X + NW, North);
+            rayS1 = new Ray(X + SE, South);
+            rayS2 = new Ray(X + SW, South);
+            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayN1) && !Physics.Raycast(rayN2) && !Physics.Raycast(rayS1) && !Physics.Raycast(rayS2))
             {
                 return true;
             }
-            else if (Physics.Raycast(rayN) || Physics.Raycast(rayS))
+            else if (Physics.Raycast(rayN1) || Physics.Raycast(rayN2) || Physics.Raycast(rayS1) || Physics.Raycast(rayS2))
             {
                 return false;
             }
-            Debug.Log(CamDir);
             if (CamDir == "camXY")
             {
-                Debug.Log("boobs");
                 X += new Vector3(0, -1.5f, 0);
-                rayN = new Ray(X, North);
-                rayS = new Ray(X, South);
-                if (Physics.Raycast(rayN) || Physics.Raycast(rayS))
+                rayN1 = new Ray(X + NE, North);
+                rayN2 = new Ray(X + NW, North);
+                rayS1 = new Ray(X + SE, South);
+                rayS2 = new Ray(X + SW, South);
+                if (Physics.Raycast(rayN1) || Physics.Raycast(rayN2) || Physics.Raycast(rayS1) || Physics.Raycast(rayS2))
                 {
                     return true;
                 }
