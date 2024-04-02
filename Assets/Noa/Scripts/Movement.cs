@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     private float speed;
     public float baseSpeed;
     [SerializeField] private float jumpForce;
+    public Animator animator;
     private Rigidbody rb;
     private bool onGround;
     
@@ -43,6 +44,7 @@ public class Movement : MonoBehaviour
             {
                 transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
                 rb.velocity = new Vector3(-speed, rb.velocity.y, rb.velocity.z);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey("d"))
             {
