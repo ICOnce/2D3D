@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
  
         ray = new Ray(transform.position, -transform.up);
         Debug.DrawRay(transform.position, -transform.up, Color.red);
-        if (Physics.Raycast(ray, 1.1f)) 
+        if (Physics.Raycast(ray, 1.5f)) 
         {
             onGround = true;
         } else
@@ -100,12 +100,12 @@ public class Movement : MonoBehaviour
             if (Input.GetKey("a"))
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -speed);
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
-                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed);
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -speed);
             }
             if (Input.GetKey(KeyCode.Space) && onGround == true)
             {

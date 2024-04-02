@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598784237403233016}
-  - component: {fileID: 7989594919302033943}
   m_Layer: 0
   m_Name: ArmRRotate
   m_TagString: Untagged
@@ -33,27 +32,6 @@ Transform:
   - {fileID: 8566830652776998935}
   m_Father: {fileID: 4024523684651764899}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7989594919302033943
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2237869138312856816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3090280134087359401
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +43,6 @@ GameObject:
   - component: {fileID: 4753387282721622934}
   - component: {fileID: 3435983804726121279}
   - component: {fileID: 3232342536973733791}
-  - component: {fileID: 3694347562928120628}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -138,27 +115,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3694347562928120628
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3090280134087359401}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3183563449695144170
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1223999594898230149}
-  - component: {fileID: 6737691826689145862}
   m_Layer: 0
   m_Name: LegRRotate
   m_TagString: Untagged
@@ -192,27 +147,6 @@ Transform:
   - {fileID: 1253217438921635704}
   m_Father: {fileID: 4024523684651764899}
   m_LocalEulerAnglesHint: {x: -0.396, y: 0, z: 0}
---- !u!65 &6737691826689145862
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183563449695144170}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3922888028310813644
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +158,6 @@ GameObject:
   - component: {fileID: 8566830652776998935}
   - component: {fileID: 4926318572441852088}
   - component: {fileID: 9059147296824205832}
-  - component: {fileID: 4158920482556407858}
   m_Layer: 0
   m_Name: ArmR
   m_TagString: Untagged
@@ -297,27 +230,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4158920482556407858
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3922888028310813644}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5474850431031591980
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +241,6 @@ GameObject:
   - component: {fileID: 1253217438921635704}
   - component: {fileID: 7980927272916808641}
   - component: {fileID: 6570115171852043418}
-  - component: {fileID: 3935420416678584813}
   m_Layer: 0
   m_Name: LegL
   m_TagString: Untagged
@@ -402,27 +313,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3935420416678584813
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5474850431031591980}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6045433451385251493
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,7 +324,6 @@ GameObject:
   - component: {fileID: 2374966356820364365}
   - component: {fileID: 9033743374506503548}
   - component: {fileID: 8186654176125978243}
-  - component: {fileID: 4416235509661945940}
   m_Layer: 0
   m_Name: ArmR
   m_TagString: Untagged
@@ -507,27 +396,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4416235509661945940
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6045433451385251493}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6177526758676269277
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +405,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2269486006516714415}
-  - component: {fileID: 3116589293515388070}
   m_Layer: 0
   m_Name: LegLRotate
   m_TagString: Untagged
@@ -561,27 +428,6 @@ Transform:
   - {fileID: 8014607981381870139}
   m_Father: {fileID: 4024523684651764899}
   m_LocalEulerAnglesHint: {x: -0.396, y: 0, z: 0}
---- !u!65 &3116589293515388070
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6177526758676269277}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6915780994307709199
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,7 +439,6 @@ GameObject:
   - component: {fileID: 8014607981381870139}
   - component: {fileID: 7061642796124639268}
   - component: {fileID: 6518140257658302536}
-  - component: {fileID: 284077621096590077}
   m_Layer: 0
   m_Name: LegL
   m_TagString: Untagged
@@ -666,27 +511,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &284077621096590077
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6915780994307709199}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7110179405005567424
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +520,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6824075093870692512}
-  - component: {fileID: 8295224867149987079}
   m_Layer: 0
   m_Name: ArmLRotate
   m_TagString: Untagged
@@ -720,27 +543,6 @@ Transform:
   - {fileID: 2374966356820364365}
   m_Father: {fileID: 4024523684651764899}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!65 &8295224867149987079
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7110179405005567424}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8857179073672020042
 GameObject:
   m_ObjectHideFlags: 0
