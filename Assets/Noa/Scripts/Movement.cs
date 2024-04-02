@@ -24,12 +24,10 @@ public class Movement : MonoBehaviour
         Debug.DrawRay(transform.position, -transform.up, Color.red);
         if (Physics.Raycast(ray, 1.1f)) 
         {
-            Debug.Log("Grounded");
             onGround = true;
         } else
         {
             onGround = false;
-            Debug.Log("Not Grounded");
         }
         if (!onGround)
         {

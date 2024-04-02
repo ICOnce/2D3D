@@ -7,82 +7,72 @@ using UnityEngine.UIElements;
 
 public class CameraChange : MonoBehaviour
 {
-    private string CamDir;
+    public static string CamDir;
     [SerializeField] private Camera camXY, camXZ, camYZ;
-    [SerializeField] private GameObject playah;
     Ray ray, rayD1, rayD2, rayD3, rayD4, rayW1, rayW2, rayE1, rayE2, rayN1, rayN2, rayS1, rayS2, rayU1, rayU2, rayU3, rayU4;
     float maxDistance = 1000;
     private Vector3 Down = new Vector3(0, -1, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
-    public Transform fakePlayer;
+    public Transform playerYZ, playerXZ, playerXY;
     private string PrevDir;
-    private Vector3 NE = new Vector3(0.5f,-0.99f,0.5f), NW = new Vector3(0.5f, -0.99f, -0.5f), SE = new Vector3(-0.5f, -0.99f, 0.5f), SW = new Vector3(-0.5f, -0.99f, -0.5f);
+    private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
     private void Start()
     {
 
     }
     void Update()
     {
+        if (camXY.enabled == true)
+        {
+            playerYZ.transform.position = playerXY.transform.position + new Vector3(500, 0, -500);
+            playerXZ.transform.position = playerXY.transform.position + new Vector3(-500, 0, -500);
+        }
+        if (camXZ.enabled == true)
+        {
+            playerYZ.transform.position = playerXZ.transform.position + new Vector3(1000, 0, 0);
+            playerXY.transform.position = playerXZ.transform.position + new Vector3(500, 0, 500);
+        }
+        if (camYZ.enabled == true)
+        {
+            playerXY.transform.position = playerYZ.transform.position + new Vector3(-500, 0, 500);
+            playerXZ.transform.position = playerYZ.transform.position + new Vector3(-1000, 0, 0);
+        }
         PrevDir = CamDir;
-        fakePlayer.transform.position = playah.transform.position + new Vector3(500, 0, 500);
         if (Input.GetKeyDown("1") && CamDir != "camXY")
         {
-            Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XY") == false) return;
+            if (CheckForCollider(playerXY.position, "XY") == false) return;
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
             CamDir ="camXY";
-            playah.GetComponent<Movement>().dir = "XY";
+            playerXY.GetComponent<Movement>().enabled = true;
+            playerXZ.GetComponent<Movement>().enabled = false;
+            playerYZ.GetComponent<Movement>().enabled = false;
             CameraMovement.ActiveCam = "XY";
-            GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-            if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
-            foreach (GameObject Platform in PlatList)
-            {
-                Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
-                Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
-                Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
-                Platform.GetComponent<Transform>().localScale = new Vector3 (prevData.localScale.x, prevData.localScale.y, 500);
-            }
             if (PrevDir == "camXZ") GetTheHeight();
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
         {
-            Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "XZ") == false) return;
+            if (CheckForCollider(playerXZ.position, "XZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
             CamDir = "camXZ";
-            playah.GetComponent<Movement>().dir = "XZ";
+            playerXY.GetComponent<Movement>().enabled = false;
+            playerXZ.GetComponent<Movement>().enabled = true;
+            playerYZ.GetComponent<Movement>().enabled = false;
             CameraMovement.ActiveCam = "XZ";
-            GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-            foreach (GameObject Platform in PlatList)
-            {
-                Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
-                Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
-                Platform.GetComponent<Transform>().localScale = new Vector3(prevData.localScale.x, 1, prevData.localScale.z);
-                Platform.GetComponent<Transform>().position = new Vector3(prevData.position.x, playah.transform.position.y-1, prevData.position.z);
-            }
         }
         else if (Input.GetKeyDown("3") && CamDir != "camYZ")
         {
-            Transform PlayerTemp = playah.transform;
-            if (CheckForCollider(PlayerTemp.position + new Vector3(500, 0, 500), "YZ") == false) return;
+            if (CheckForCollider(playerYZ.position, "YZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = false;
             camYZ.enabled = true;
             CamDir = "camYZ";
-            playah.GetComponent<Movement>().dir = "ZY";
+            playerXY.GetComponent<Movement>().enabled = false;
+            playerXZ.GetComponent<Movement>().enabled = false;
+            playerYZ.GetComponent<Movement>().enabled = true;
             CameraMovement.ActiveCam = "YZ";
-            if (PrevDir == "camXZ") playah.GetComponent<Transform>().position = new Vector3(playah.GetComponent<Transform>().position.x, 500, playah.GetComponent<Transform>().position.z);
-            GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-            foreach (GameObject Platform in PlatList)
-            {
-                Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
-                Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
-                Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
-                Platform.GetComponent<Transform>().localScale = new Vector3(500, prevData.localScale.y, prevData.localScale.z);
-            }
             if (PrevDir == "camXZ") GetTheHeight();
         }
     }
@@ -174,11 +164,85 @@ public class CameraChange : MonoBehaviour
     }
     private void GetTheHeight()
     {
-        ray = new Ray(playah.transform.position + new Vector3 (500, 0, 500), new Vector3(0, -1, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+        float shortDist=Mathf.Infinity;
+        Transform shortPlat;
+        if (CamDir == "XY")
         {
-            Transform temp = hit.collider.gameObject.transform;
-            playah.transform.position = new Vector3(playah.transform.position.x, temp.position.y + (0.5f * temp.localScale.y) + (0.6f * playah.transform.localScale.y), playah.transform.position.z);
+            rayD1 = new Ray(playerXY.transform.position + NE, Down);
+            rayD2 = new Ray(playerXY.transform.position + NW, Down);
+            rayD3 = new Ray(playerXY.transform.position + SE, Down);
+            rayD4 = new Ray(playerXY.transform.position + SW, Down);
+            if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
+            {
+                if (playerXY.transform.position.y - hitXY1.transform.position.y < shortDist)
+                {
+                    shortDist = playerXY.transform.position.y - hitXY1.transform.position.y;
+                    shortPlat = hitXY1.transform;
+                }
+            }
+            if (Physics.Raycast(rayD2, out RaycastHit hitXY2, maxDistance))
+            {
+                if (playerXY.transform.position.y - hitXY2.transform.position.y < shortDist)
+                {
+                    shortDist = playerXY.transform.position.y - hitXY2.transform.position.y;
+                    shortPlat = hitXY2.transform;
+                }
+            }
+            if (Physics.Raycast(rayD3, out RaycastHit hitXY3, maxDistance))
+            {
+                if (playerXY.transform.position.y - hitXY3.transform.position.y < shortDist)
+                {
+                    shortDist = playerXY.transform.position.y - hitXY3.transform.position.y;
+                    shortPlat = hitXY3.transform;
+                }
+            }
+            if (Physics.Raycast(rayD4, out RaycastHit hitXY4, maxDistance))
+            {
+                if (playerXY.transform.position.y - hitXY4.transform.position.y < shortDist)
+                {
+                    shortDist = playerXY.transform.position.y - hitXY4.transform.position.y;
+                    shortPlat = hitXY4.transform;
+                }
+            }
+        }
+        if (CamDir == "YZ")
+        {
+            rayD1 = new Ray(playerYZ.transform.position + NE, Down);
+            rayD2 = new Ray(playerYZ.transform.position + NW, Down);
+            rayD3 = new Ray(playerYZ.transform.position + SE, Down);
+            rayD4 = new Ray(playerYZ.transform.position + SW, Down);
+            if (Physics.Raycast(rayD1, out RaycastHit hitYZ1, maxDistance))
+            {
+                if (playerYZ.transform.position.y - hitYZ1.transform.position.y < shortDist)
+                {
+                    shortDist = playerYZ.transform.position.y - hitYZ1.transform.position.y;
+                    shortPlat = hitYZ1.transform;
+                }
+            }
+            if (Physics.Raycast(rayD2, out RaycastHit hitYZ2, maxDistance))
+            {
+                if (playerYZ.transform.position.y - hitYZ2.transform.position.y < shortDist)
+                {
+                    shortDist = playerYZ.transform.position.y - hitYZ2.transform.position.y;
+                    shortPlat = hitYZ2.transform;
+                }
+            }
+            if (Physics.Raycast(rayD3, out RaycastHit hitYZ3, maxDistance))
+            {
+                if (playerYZ.transform.position.y - hitYZ3.transform.position.y < shortDist)
+                {
+                    shortDist = playerYZ.transform.position.y - hitYZ3.transform.position.y;
+                    shortPlat = hitYZ3.transform;
+                }
+            }
+            if (Physics.Raycast(rayD4, out RaycastHit hitYZ4, maxDistance))
+            {
+                if (playerYZ.transform.position.y - hitYZ4.transform.position.y < shortDist)
+                {
+                    shortDist = playerYZ.transform.position.y - hitYZ4.transform.position.y;
+                    shortPlat = hitYZ4.transform;
+                }
+            }
         }
     }
 }
