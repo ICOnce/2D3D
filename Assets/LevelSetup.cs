@@ -16,11 +16,11 @@ public class LevelSetup : MonoBehaviour
         LevelXZ.transform.position = new Vector3(-500, 0, 0);
         foreach (Transform child in LevelXY.transform)
         {
-            child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
+            child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
         }
         foreach (Transform child in LevelYZ.transform)
         {
-            child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
+            child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
         }
         foreach (Transform child in LevelXZ.transform)
         {

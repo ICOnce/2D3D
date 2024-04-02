@@ -4,35 +4,38 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private Transform Player, CamXY, CamYZ, CamXZ;
+    [SerializeField] private Transform PlayerXY, PlayerXZ, PlayerYZ, CamXY, CamYZ, CamXZ;
     public static string ActiveCam;
     private int HeightDiff = 4;
     private int SideDiff = 8;
     void Update()
     {
-        float PlayerX = Player.position.x;
-        float PlayerY = Player.position.y;
-        float PlayerZ = Player.position.z;
+        float PlayerXYx = PlayerXY.position.x;
+        float PlayerXYy = PlayerXY.position.y;
+        float PlayerXZx = PlayerXZ.position.x;
+        float PlayerXZz = PlayerXZ.position.z;
+        float PlayerYZy = PlayerYZ.position.y;
+        float PlayerYZz = PlayerYZ.position.z;
         if (ActiveCam == "XY")
         {
             float CamX = CamXY.position.x;
             float CamY = CamXY.position.y;
             float CamZ = CamXY.position.z;
-            if (PlayerX-CamX > SideDiff)
+            if (PlayerXYx-CamX > SideDiff)
             {
-                CamXY.position = new Vector3(PlayerX-SideDiff, CamY, CamZ);
+                CamXY.position = new Vector3(PlayerXYx-SideDiff, CamY, CamZ);
             }
-            else if (PlayerX - CamX < -SideDiff)
+            else if (PlayerXYx - CamX < -SideDiff)
             {
-                CamXY.position = new Vector3(PlayerX + SideDiff, CamY, CamZ);
+                CamXY.position = new Vector3(PlayerXYx + SideDiff, CamY, CamZ);
             }
-            if (PlayerY - CamY > HeightDiff)
+            if (PlayerXYy - CamY > HeightDiff)
             {
-                CamXY.position = new Vector3(CamX, PlayerY - HeightDiff, CamZ);
+                CamXY.position = new Vector3(CamX, PlayerXYy - HeightDiff, CamZ);
             }
-            else if (PlayerY - CamY < -HeightDiff)
+            else if (PlayerXYy - CamY < -HeightDiff)
             {
-                CamXY.position = new Vector3(CamX, PlayerY + HeightDiff, CamZ);
+                CamXY.position = new Vector3(CamX, PlayerXYy + HeightDiff, CamZ);
             }
         }
         if (ActiveCam == "YZ")
@@ -40,21 +43,21 @@ public class CameraMovement : MonoBehaviour
             float CamX = CamYZ.position.x;
             float CamY = CamYZ.position.y;
             float CamZ = CamYZ.position.z;
-            if (PlayerZ-CamZ > SideDiff)
+            if (PlayerYZz-CamZ > SideDiff)
             {
-                CamYZ.position = new Vector3(CamX, CamY, PlayerZ - SideDiff);
+                CamYZ.position = new Vector3(CamX, CamY, PlayerYZz - SideDiff);
             }
-            else if (PlayerZ-CamZ < -SideDiff)
+            else if (PlayerYZz-CamZ < -SideDiff)
             {
-                CamYZ.position = new Vector3(CamX, CamY, PlayerZ + SideDiff);
+                CamYZ.position = new Vector3(CamX, CamY, PlayerYZz + SideDiff);
             }
-            if (PlayerY - CamYZ.position.y > HeightDiff)
+            if (PlayerYZy - CamYZ.position.y > HeightDiff)
             {
-                CamYZ.position = new Vector3(CamX, PlayerY-HeightDiff, CamZ);
+                CamYZ.position = new Vector3(CamX, PlayerYZy-HeightDiff, CamZ);
             }
-            else if (PlayerY - CamYZ.position.y < -HeightDiff)
+            else if (PlayerYZy - CamYZ.position.y < -HeightDiff)
             {
-                CamYZ.position = new Vector3(CamX, PlayerY+HeightDiff, CamZ);
+                CamYZ.position = new Vector3(CamX, PlayerYZy+HeightDiff, CamZ);
             }
         }
         if (ActiveCam == "XZ")
@@ -62,21 +65,21 @@ public class CameraMovement : MonoBehaviour
             float CamX = CamXZ.position.x;
             float CamY = CamXZ.position.y;
             float CamZ = CamXZ.position.z;
-            if (PlayerX-CamX > SideDiff)
+            if (PlayerXZx-CamX > SideDiff)
             {
-                CamXZ.position = new Vector3(PlayerX - SideDiff, CamY, CamZ);
+                CamXZ.position = new Vector3(PlayerXZx - SideDiff, CamY, CamZ);
             }
-            else if (PlayerX-CamX < -SideDiff)
+            else if (PlayerXZx-CamX < -SideDiff)
             {
-                CamXZ.position = new Vector3(PlayerX + SideDiff, CamY, CamZ);
+                CamXZ.position = new Vector3(PlayerXZx + SideDiff, CamY, CamZ);
             }
-            if (PlayerZ-CamZ > SideDiff)
+            if (PlayerXZz-CamZ > SideDiff)
             {
-                CamXZ.position = new Vector3(CamX, CamY, PlayerZ - SideDiff);
+                CamXZ.position = new Vector3(CamX, CamY, PlayerXZz - SideDiff);
             }
-            else if (PlayerZ - CamZ < -SideDiff)
+            else if (PlayerXZz - CamZ < -SideDiff)
             {
-                CamXZ.position = new Vector3(CamX, CamY, PlayerZ +  SideDiff);
+                CamXZ.position = new Vector3(CamX, CamY, PlayerXZz +  SideDiff);
             }
         }
     }
