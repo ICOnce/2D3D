@@ -23,12 +23,14 @@ public class Movement : MonoBehaviour
  
         ray = new Ray(transform.position, -transform.up);
         Debug.DrawRay(transform.position, -transform.up, Color.red);
-        if (Physics.Raycast(ray, 1.5f)) 
+        if (Physics.Raycast(ray, 1.6f)) 
         {
             onGround = true;
+            Debug.Log("Grounded");
         } else
         {
             onGround = false;
+            Debug.Log("Flying");
         }
         if (!onGround)
         {
@@ -48,6 +50,7 @@ public class Movement : MonoBehaviour
             {
                 transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
                 rb.velocity = new Vector3(speed, rb.velocity.y, rb.velocity.z);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey(KeyCode.Space) && onGround == true)
             {
@@ -58,10 +61,12 @@ public class Movement : MonoBehaviour
             if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                animator.SetBool("Running", false);
             }
             else if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround != true) 
             {
                 rb.velocity = new Vector3(rb.velocity.x * 0.96f , rb.velocity.y, rb.velocity.z * 0.96f);
+                animator.SetBool("Running", false);
             }
         }
         
@@ -72,26 +77,31 @@ public class Movement : MonoBehaviour
             {
                 transform.rotation = new Quaternion(0, -0.70711f, 0, 0.70711f);
                 rb.velocity = new Vector3(-speed, rb.velocity.y, 0);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0.70711f, 0, 0.70711f);
                 rb.velocity = new Vector3(speed, rb.velocity.y, 0);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey("s"))
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
                 rb.velocity = new Vector3(0, rb.velocity.y, -speed);
+                animator.SetBool("Running", true);
             }
 
             if (Input.GetKey("w"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
                 rb.velocity = new Vector3(0, rb.velocity.y, speed);
+                animator.SetBool("Running", true);
             }
             if ((!(Input.GetKey("a") || Input.GetKey("d") || Input.GetKey("w") || Input.GetKey("s"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                animator.SetBool("Running", false);
             }
         }
 
@@ -101,11 +111,13 @@ public class Movement : MonoBehaviour
             {
                 transform.rotation = new Quaternion(0, 1, 0, 0);
                 rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speed);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey("d"))
             {
                 transform.rotation = new Quaternion(0, 0, 0, 1);
                 rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -speed);
+                animator.SetBool("Running", true);
             }
             if (Input.GetKey(KeyCode.Space) && onGround == true)
             {
@@ -116,10 +128,12 @@ public class Movement : MonoBehaviour
             if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround == true)
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                animator.SetBool("Running", false);
             }
             else if ((!(Input.GetKey("a") || Input.GetKey("d"))) && onGround != true)
             {
                 rb.velocity = new Vector3(rb.velocity.x * 0.96f, rb.velocity.y, rb.velocity.z * 0.96f);
+                animator.SetBool("Running", false);
             }
         }
     }

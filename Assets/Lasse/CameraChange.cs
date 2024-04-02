@@ -114,16 +114,25 @@ public class CameraChange : MonoBehaviour
                 }
             }
         }
+        Debug.Log((X + SW) + " : " + (X + NW));
         if (newCamDir == "XZ")
         {
             rayD1 = new Ray(X + NE, Down);
+            Debug.DrawRay(X + NE, Down, Color.red);
             rayD2 = new Ray(X + NW, Down);
+            Debug.DrawRay(X + NW, Down, Color.red);
             rayD3 = new Ray(X + SE, Down);
+            Debug.DrawRay(X + SE, Down, Color.red);
             rayD4 = new Ray(X + SW, Down);
+            Debug.DrawRay(X + SW, Down, Color.red);
             rayU1 = new Ray(X + NE, Up);
+            Debug.DrawRay(X + NE, Up, Color.red);
             rayU2 = new Ray(X + NW, Up);
+            Debug.DrawRay(X + NW, Up, Color.red);
             rayU3 = new Ray(X + SE, Up);
+            Debug.DrawRay(X + SE, Up, Color.red);
             rayU4 = new Ray(X + SW, Up);
+            Debug.DrawRay(X + SW, Up, Color.red);
             if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayU1) && !Physics.Raycast(rayU2) && !Physics.Raycast(rayU3) && !Physics.Raycast(rayU4))
             {
                 return true;
