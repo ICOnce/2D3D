@@ -11,7 +11,8 @@ public class CameraChange : MonoBehaviour
     [SerializeField] private Camera camXY, camXZ, camYZ;
     Ray ray, rayD1, rayD2, rayD3, rayD4, rayW1, rayW2, rayE1, rayE2, rayN1, rayN2, rayS1, rayS2, rayU1, rayU2, rayU3, rayU4;
     float maxDistance = 1000;
-    private Vector3 Down = new Vector3(0, -1, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
+    private Vector3 Down = new Vector3(0, -10000, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
+    private int maxDist = 250;
     public Transform playerYZ, playerXZ, playerXY;
     private string PrevDir;
     private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
@@ -21,6 +22,11 @@ public class CameraChange : MonoBehaviour
     }
     void Update()
     {
+        Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
+        Debug.DrawRay(Height + NE, Down, Color.red);
+        Debug.DrawRay(Height + SE, Down, Color.red);
+        Debug.DrawRay(Height + NW, Down, Color.red);
+        Debug.DrawRay(Height + SW, Down, Color.red);
         if (camXY.enabled == true)
         {
             playerYZ.transform.position = playerXY.transform.position + new Vector3(500, 0, -500);
@@ -48,7 +54,11 @@ public class CameraChange : MonoBehaviour
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = false;
             CameraMovement.ActiveCam = "XY";
-            if (PrevDir == "camXZ") GetTheHeight();
+            if (PrevDir == "camXZ")
+            {
+                GetTheHeight();
+                Debug.Log("getting high");
+            }
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
         {
@@ -64,7 +74,11 @@ public class CameraChange : MonoBehaviour
         }
         else if (Input.GetKeyDown("3") && CamDir != "camYZ")
         {
-            if (CheckForCollider(playerYZ.position, "YZ") == false) return;
+            if (CheckForCollider(playerYZ.position, "YZ") == false)
+            {
+                Debug.Log("FALSE!");
+                return;
+            }
             camXY.enabled = false;
             camXZ.enabled = false;
             camYZ.enabled = true;
@@ -80,8 +94,8 @@ public class CameraChange : MonoBehaviour
     {
         if (CamDir == "camXZ")
         {
-            ray = new Ray(X + new Vector3(0,500,0), Down);
-            if (Physics.Raycast(ray, out RaycastHit hit)) X = hit.point + new Vector3(0,1,0);
+            ray = new Ray(X + new Vector3(0,200,0), Down);
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDist)) X = hit.point + new Vector3(0,1,0);
         }
         if (newCamDir == "XY")
         {
@@ -93,25 +107,13 @@ public class CameraChange : MonoBehaviour
             rayE2 = new Ray(X + NE, East);
             rayW1 = new Ray(X + SW, West);
             rayW2 = new Ray(X + NW, West);
-            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayE1) && !Physics.Raycast(rayE2) && !Physics.Raycast(rayW1) && !Physics.Raycast(rayW2))
+            if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayE1, maxDist) && !Physics.Raycast(rayE2, maxDist) && !Physics.Raycast(rayW1, maxDist) && !Physics.Raycast(rayW2, maxDist))
             {               
                 return true;
             }
-            else if (Physics.Raycast(rayE1) || Physics.Raycast(rayW1))
+            else if (Physics.Raycast(rayE1, maxDist) || Physics.Raycast(rayW1, maxDist))
             {
                 return false;
-            }
-            if (CamDir == "camYZ")
-            {
-                X += new Vector3(0, -1.5f, 0);
-                rayE1 = new Ray(X + SE, East);
-                rayE2 = new Ray(X + NE, East);
-                rayW1 = new Ray(X + SW, West);
-                rayW2 = new Ray(X + NW, West);
-                if (Physics.Raycast(rayE1) || Physics.Raycast(rayE2) || Physics.Raycast(rayW1) || Physics.Raycast(rayW2))
-                {
-                    return true;
-                }
             }
         }
         Debug.Log((X + SW) + " : " + (X + NW));
@@ -133,7 +135,7 @@ public class CameraChange : MonoBehaviour
             Debug.DrawRay(X + SE, Up, Color.red);
             rayU4 = new Ray(X + SW, Up);
             Debug.DrawRay(X + SW, Up, Color.red);
-            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayU1) && !Physics.Raycast(rayU2) && !Physics.Raycast(rayU3) && !Physics.Raycast(rayU4))
+            if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayU1, maxDist) && !Physics.Raycast(rayU2, maxDist) && !Physics.Raycast(rayU3, maxDist) && !Physics.Raycast(rayU4, maxDist))
             {
                 return true;
             }
@@ -148,110 +150,102 @@ public class CameraChange : MonoBehaviour
             rayN2 = new Ray(X + NW, North);
             rayS1 = new Ray(X + SE, South);
             rayS2 = new Ray(X + SW, South);
-            if ((Physics.Raycast(rayD1) || Physics.Raycast(rayD2) || Physics.Raycast(rayD3) || Physics.Raycast(rayD4)) && !Physics.Raycast(rayN1) && !Physics.Raycast(rayN2) && !Physics.Raycast(rayS1) && !Physics.Raycast(rayS2))
+            if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayN1, maxDist) && !Physics.Raycast(rayN2, maxDist) && !Physics.Raycast(rayS1, maxDist) && !Physics.Raycast(rayS2, maxDist))
             {
                 return true;
             }
-            else if (Physics.Raycast(rayN1) || Physics.Raycast(rayN2) || Physics.Raycast(rayS1) || Physics.Raycast(rayS2))
+            else if (Physics.Raycast(rayN1, maxDist) || Physics.Raycast(rayN2, maxDist) || Physics.Raycast(rayS1, maxDist) || Physics.Raycast(rayS2, maxDist))
             {
                 return false;
-            }
-            if (CamDir == "camXY")
-            {
-                X += new Vector3(0, -1.5f, 0);
-                rayN1 = new Ray(X + NE, North);
-                rayN2 = new Ray(X + NW, North);
-                rayS1 = new Ray(X + SE, South);
-                rayS2 = new Ray(X + SW, South);
-                if (Physics.Raycast(rayN1) || Physics.Raycast(rayN2) || Physics.Raycast(rayS1) || Physics.Raycast(rayS2))
-                {
-                    return true;
-                }
             }
         }
         return false;
     }
     private void GetTheHeight()
     {
-        float shortDist=Mathf.Infinity;
-        Transform shortPlat;
-        if (CamDir == "XY")
+        float shortDist=500000;
+        Transform shortPlat = playerXY;
+        if (CamDir == "camXY")
         {
-            rayD1 = new Ray(playerXY.transform.position + NE, Down);
-            rayD2 = new Ray(playerXY.transform.position + NW, Down);
-            rayD3 = new Ray(playerXY.transform.position + SE, Down);
-            rayD4 = new Ray(playerXY.transform.position + SW, Down);
+            Vector3 Height = playerXY.transform.position + new Vector3 (0,100,0);
+            rayD1 = new Ray(Height + NE, Down);
+            rayD2 = new Ray(Height + NW, Down);
+            rayD3 = new Ray(Height + SE, Down);
+            rayD4 = new Ray(Height + SW, Down);
             if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
             {
-                if (playerXY.transform.position.y - hitXY1.transform.position.y < shortDist)
+                if (Height.y - hitXY1.transform.position.y < shortDist)
                 {
-                    shortDist = playerXY.transform.position.y - hitXY1.transform.position.y;
+                    shortDist = Height.y - hitXY1.transform.position.y;
                     shortPlat = hitXY1.transform;
                 }
             }
             if (Physics.Raycast(rayD2, out RaycastHit hitXY2, maxDistance))
             {
-                if (playerXY.transform.position.y - hitXY2.transform.position.y < shortDist)
+                if (Height.y - hitXY2.transform.position.y < shortDist)
                 {
-                    shortDist = playerXY.transform.position.y - hitXY2.transform.position.y;
+                    shortDist = Height.y - hitXY2.transform.position.y;
                     shortPlat = hitXY2.transform;
                 }
             }
             if (Physics.Raycast(rayD3, out RaycastHit hitXY3, maxDistance))
             {
-                if (playerXY.transform.position.y - hitXY3.transform.position.y < shortDist)
+                if (Height.y - hitXY3.transform.position.y < shortDist)
                 {
-                    shortDist = playerXY.transform.position.y - hitXY3.transform.position.y;
+                    shortDist = Height.y - hitXY3.transform.position.y;
                     shortPlat = hitXY3.transform;
                 }
             }
             if (Physics.Raycast(rayD4, out RaycastHit hitXY4, maxDistance))
             {
-                if (playerXY.transform.position.y - hitXY4.transform.position.y < shortDist)
+                if (Height.y - hitXY4.transform.position.y < shortDist)
                 {
-                    shortDist = playerXY.transform.position.y - hitXY4.transform.position.y;
+                    shortDist = Height.y - hitXY4.transform.position.y;
                     shortPlat = hitXY4.transform;
                 }
             }
+            playerXY.transform.position = new Vector3(playerXY.transform.position.x, shortPlat.transform.position.y + shortPlat.transform.localScale.y / 2 + 0.5f, playerXY.transform.position.z);
         }
-        if (CamDir == "YZ")
+        if (CamDir == "camYZ")
         {
-            rayD1 = new Ray(playerYZ.transform.position + NE, Down);
-            rayD2 = new Ray(playerYZ.transform.position + NW, Down);
-            rayD3 = new Ray(playerYZ.transform.position + SE, Down);
-            rayD4 = new Ray(playerYZ.transform.position + SW, Down);
-            if (Physics.Raycast(rayD1, out RaycastHit hitYZ1, maxDistance))
+            Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
+            rayD1 = new Ray(Height + NE, Down);
+            rayD2 = new Ray(Height + NW, Down);
+            rayD3 = new Ray(Height + SE, Down);
+            rayD4 = new Ray(Height + SW, Down);
+            if (Physics.Raycast(rayD1, out RaycastHit hitYZ1, maxDist))
             {
-                if (playerYZ.transform.position.y - hitYZ1.transform.position.y < shortDist)
+                if (Height.y - hitYZ1.transform.position.y < shortDist)
                 {
-                    shortDist = playerYZ.transform.position.y - hitYZ1.transform.position.y;
+                    shortDist = Height.y - hitYZ1.transform.position.y;
                     shortPlat = hitYZ1.transform;
                 }
             }
-            if (Physics.Raycast(rayD2, out RaycastHit hitYZ2, maxDistance))
+            if (Physics.Raycast(rayD2, out RaycastHit hitYZ2, maxDist))
             {
-                if (playerYZ.transform.position.y - hitYZ2.transform.position.y < shortDist)
+                if (Height.y - hitYZ2.transform.position.y < shortDist)
                 {
-                    shortDist = playerYZ.transform.position.y - hitYZ2.transform.position.y;
+                    shortDist = Height.y - hitYZ2.transform.position.y;
                     shortPlat = hitYZ2.transform;
                 }
             }
-            if (Physics.Raycast(rayD3, out RaycastHit hitYZ3, maxDistance))
+            if (Physics.Raycast(rayD3, out RaycastHit hitYZ3, maxDist))
             {
-                if (playerYZ.transform.position.y - hitYZ3.transform.position.y < shortDist)
+                if (Height.y - hitYZ3.transform.position.y < shortDist)
                 {
-                    shortDist = playerYZ.transform.position.y - hitYZ3.transform.position.y;
+                    shortDist = Height.y - hitYZ3.transform.position.y;
                     shortPlat = hitYZ3.transform;
                 }
             }
-            if (Physics.Raycast(rayD4, out RaycastHit hitYZ4, maxDistance))
+            if (Physics.Raycast(rayD4, out RaycastHit hitYZ4, maxDist))
             {
-                if (playerYZ.transform.position.y - hitYZ4.transform.position.y < shortDist)
+                if (Height.y - hitYZ4.transform.position.y < shortDist)
                 {
-                    shortDist = playerYZ.transform.position.y - hitYZ4.transform.position.y;
+                    shortDist = Height.y - hitYZ4.transform.position.y;
                     shortPlat = hitYZ4.transform;
                 }
             }
+            playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, shortPlat.transform.position.y + shortPlat.transform.localScale.y / 2 + 0.5f, playerYZ.transform.position.z);
         }
     }
 }

@@ -27,7 +27,7 @@ public class LevelSetup : MonoBehaviour
             child.transform.localScale = new Vector3(child.transform.localScale.x, 1, child.transform.localScale.z);
             child.transform.position = new Vector3(child.transform.position.x, 0, child.transform.position.z);
         }
-        //StartLevelCamPos();
+        StartLevelCamPos();
     }
     void Update()
     {
