@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     public static string ActiveCam;
     private int HeightDiff = 4;
     private int SideDiff = 8;
+    private int DeathHeight = -3;
     void Update()
     {
         float PlayerXYx = PlayerXY.position.x;
@@ -33,7 +34,7 @@ public class CameraMovement : MonoBehaviour
             {
                 CamXY.position = new Vector3(CamX, PlayerXYy - HeightDiff, CamZ);
             }
-            else if (PlayerXYy - CamY < -HeightDiff)
+            else if (PlayerXYy - CamY < -HeightDiff && !(CamY < -3))
             {
                 CamXY.position = new Vector3(CamX, PlayerXYy + HeightDiff, CamZ);
             }
@@ -55,7 +56,7 @@ public class CameraMovement : MonoBehaviour
             {
                 CamYZ.position = new Vector3(CamX, PlayerYZy-HeightDiff, CamZ);
             }
-            else if (PlayerYZy - CamYZ.position.y < -HeightDiff)
+            else if (PlayerYZy - CamYZ.position.y < -HeightDiff && !(CamY < -3))
             {
                 CamYZ.position = new Vector3(CamX, PlayerYZy+HeightDiff, CamZ);
             }

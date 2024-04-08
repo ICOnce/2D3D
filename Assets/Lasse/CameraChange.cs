@@ -23,10 +23,6 @@ public class CameraChange : MonoBehaviour
     void Update()
     {
         Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
-        Debug.DrawRay(Height + NE, Down, Color.red);
-        Debug.DrawRay(Height + SE, Down, Color.red);
-        Debug.DrawRay(Height + NW, Down, Color.red);
-        Debug.DrawRay(Height + SW, Down, Color.red);
         if (camXY.enabled == true)
         {
             playerYZ.transform.position = playerXY.transform.position + new Vector3(500, 0, -500);
@@ -57,7 +53,6 @@ public class CameraChange : MonoBehaviour
             if (PrevDir == "camXZ")
             {
                 GetTheHeight();
-                Debug.Log("getting high");
             }
         }
         else if (Input.GetKeyDown("2") && CamDir != "camXZ")
@@ -76,7 +71,6 @@ public class CameraChange : MonoBehaviour
         {
             if (CheckForCollider(playerYZ.position, "YZ") == false)
             {
-                Debug.Log("FALSE!");
                 return;
             }
             camXY.enabled = false;
@@ -116,25 +110,16 @@ public class CameraChange : MonoBehaviour
                 return false;
             }
         }
-        Debug.Log((X + SW) + " : " + (X + NW));
         if (newCamDir == "XZ")
         {
             rayD1 = new Ray(X + NE, Down);
-            Debug.DrawRay(X + NE, Down, Color.red);
             rayD2 = new Ray(X + NW, Down);
-            Debug.DrawRay(X + NW, Down, Color.red);
             rayD3 = new Ray(X + SE, Down);
-            Debug.DrawRay(X + SE, Down, Color.red);
             rayD4 = new Ray(X + SW, Down);
-            Debug.DrawRay(X + SW, Down, Color.red);
             rayU1 = new Ray(X + NE, Up);
-            Debug.DrawRay(X + NE, Up, Color.red);
             rayU2 = new Ray(X + NW, Up);
-            Debug.DrawRay(X + NW, Up, Color.red);
             rayU3 = new Ray(X + SE, Up);
-            Debug.DrawRay(X + SE, Up, Color.red);
             rayU4 = new Ray(X + SW, Up);
-            Debug.DrawRay(X + SW, Up, Color.red);
             if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayU1, maxDist) && !Physics.Raycast(rayU2, maxDist) && !Physics.Raycast(rayU3, maxDist) && !Physics.Raycast(rayU4, maxDist))
             {
                 return true;

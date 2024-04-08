@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Movement : MonoBehaviour
     private bool onGround;
     
     public string dir;
-
+    
     private Ray ray;
     private void Start()
     {
@@ -22,15 +23,17 @@ public class Movement : MonoBehaviour
     {
  
         ray = new Ray(transform.position, -transform.up);
-        Debug.DrawRay(transform.position, -transform.up, Color.red);
-        if (Physics.Raycast(ray, 1.6f)) 
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.6f)) 
         {
             onGround = true;
-            Debug.Log("Grounded");
+            if (hit.transform.tag == "Winner")
+            {
+                //SceneManager.LoadScene("Level" + Level)
+                Debug.Log("winner!");
+            }
         } else
         {
             onGround = false;
-            Debug.Log("Flying");
         }
         if (!onGround)
         {
