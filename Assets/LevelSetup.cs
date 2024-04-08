@@ -38,13 +38,5 @@ public class LevelSetup : MonoBehaviour
         CameraChange.CamDir = "camXY";
         player.GetComponent<Movement>().dir = "XY";
         CameraMovement.ActiveCam = "XY";
-        GameObject[] PlatList = GameObject.FindGameObjectsWithTag("Platform");
-        foreach (GameObject Platform in PlatList)
-        {
-            Transform prevData = Platform.GetComponent<PlatData>().prevTrans;
-            Platform.GetComponent<Transform>().localScale = new Vector3(Platform.GetComponent<PlatData>().scalX, Platform.GetComponent<PlatData>().scalY, Platform.GetComponent<PlatData>().scalZ);
-            Platform.GetComponent<Transform>().position = new Vector3(Platform.GetComponent<PlatData>().cordX, Platform.GetComponent<PlatData>().cordY, Platform.GetComponent<PlatData>().cordZ);
-            Platform.GetComponent<Transform>().localScale = new Vector3(prevData.localScale.x, prevData.localScale.y, 500);
-        }
     }
 }
