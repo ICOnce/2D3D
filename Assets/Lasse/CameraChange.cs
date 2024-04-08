@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
@@ -49,6 +50,9 @@ public class CameraChange : MonoBehaviour
             playerXY.GetComponent<Movement>().enabled = true;
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = false;
+            playerXY.GetComponent<Rigidbody>().useGravity = true;
+            playerXZ.GetComponent<Rigidbody>().useGravity = false;
+            playerYZ.GetComponent<Rigidbody>().useGravity = false;
             CameraMovement.ActiveCam = "XY";
             if (PrevDir == "camXZ")
             {
@@ -65,6 +69,9 @@ public class CameraChange : MonoBehaviour
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = true;
             playerYZ.GetComponent<Movement>().enabled = false;
+            playerXY.GetComponent<Rigidbody>().useGravity = false;
+            playerXZ.GetComponent<Rigidbody>().useGravity = true;
+            playerYZ.GetComponent<Rigidbody>().useGravity = false;
             CameraMovement.ActiveCam = "XZ";
         }
         else if (Input.GetKeyDown("3") && CamDir != "camYZ")
@@ -80,6 +87,9 @@ public class CameraChange : MonoBehaviour
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = true;
+            playerXY.GetComponent<Rigidbody>().useGravity = false;
+            playerXZ.GetComponent<Rigidbody>().useGravity = false;
+            playerYZ.GetComponent<Rigidbody>().useGravity = true;
             CameraMovement.ActiveCam = "YZ";
             if (PrevDir == "camXZ") GetTheHeight();
         }

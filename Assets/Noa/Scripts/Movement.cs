@@ -30,7 +30,11 @@ public class Movement : MonoBehaviour
             onGround = true;
             if (hit.transform.tag == "Winner")
             {
-                SceneManager.LoadScene("Level" + Level+1);
+                SceneManager.LoadScene("Level" + (Level+1));
+            }
+            if (hit.transform.tag == "Spoke" /*&& transform.name == "Player" + transform.GetComponent<Death>().startCam*/)
+            {
+                transform.GetComponent<Death>().DeathActivate();
             }
         } else
         {
@@ -109,7 +113,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        if (dir == "ZY")
+        if (dir == "YZ")
         {
             if (Input.GetKey("a"))
             {

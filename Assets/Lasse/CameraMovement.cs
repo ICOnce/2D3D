@@ -8,7 +8,6 @@ public class CameraMovement : MonoBehaviour
     public static string ActiveCam;
     private int HeightDiff = 4;
     private int SideDiff = 8;
-    private int DeathHeight = -3;
     void Update()
     {
         float PlayerXYx = PlayerXY.position.x;

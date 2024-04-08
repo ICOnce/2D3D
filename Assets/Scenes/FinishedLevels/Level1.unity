@@ -243,6 +243,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1898829934}
     - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 1982162197}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: startCam
       value: XY
       objectReference: {fileID: 0}
@@ -465,6 +469,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1898829934}
     - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 1982162197}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: startCam
       value: XY
       objectReference: {fileID: 0}
@@ -570,6 +578,10 @@ PrefabInstance:
       propertyPath: camYZ
       value: 
       objectReference: {fileID: 1898829934}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 1982162197}
     - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: startCam
       value: XY
@@ -1813,6 +1825,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1982162197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8857179073672020042, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+  m_PrefabInstance: {fileID: 510219828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1987354554
 GameObject:
   m_ObjectHideFlags: 0

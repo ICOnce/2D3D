@@ -9,7 +9,7 @@ public class Death : MonoBehaviour
     private Quaternion startRot;
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject PlayerXY, PlayerXZ, PlayerYZ;
-    [SerializeField] string startCam;
+    public string startCam;
     void Start()
     {
         startPos = transform.position;
@@ -21,29 +21,46 @@ public class Death : MonoBehaviour
     {
         if (transform.position.y < -20 && transform.name == "Player" + startCam)
         {
-            CameraChange.CamDir = startCam;
-            transform.GetComponent<Movement>().dir = startCam;
+            DeathActivate();
+        }
+    }
+    public void DeathActivate()
+    {
+        CameraChange.CamDir = startCam;
+        transform.GetComponent<Movement>().dir = startCam;
+        transform.position = startPos;
+        transform.rotation = startRot;
+        transform.GetComponent<Movement>().enabled = true;
+        transform.GetComponent<Rigidbody>().useGravity = true;
+        if (startCam == "XY")
+        {
+            PlayerXZ.GetComponent<Movement>().enabled = false;
+            PlayerYZ.GetComponent<Movement>().enabled = false;
+            PlayerXZ.GetComponent<Rigidbody>().useGravity = false;
+            PlayerYZ.GetComponent<Rigidbody>().useGravity = false;
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
-            transform.position = startPos;
-            transform.rotation = startRot;
-            transform.GetComponent<Movement>().enabled = true;
-            if (startCam == "XY")
-            {
-                PlayerXZ.GetComponent<Movement>().enabled = false;
-                PlayerYZ.GetComponent<Movement>().enabled = false;
-            }
-            else if (startCam == "XZ")
-            {
-                PlayerXY.GetComponent<Movement>().enabled = false;
-                PlayerYZ.GetComponent<Movement>().enabled = false;
-            }
-            if (startCam == "YZ")
-            {
-                PlayerXZ.GetComponent<Movement>().enabled = false;
-                PlayerXY.GetComponent<Movement>().enabled = false;
-            }
+        }
+        else if (startCam == "XZ")
+        {
+            PlayerXY.GetComponent<Movement>().enabled = false;
+            PlayerYZ.GetComponent<Movement>().enabled = false;
+            PlayerXY.GetComponent<Rigidbody>().useGravity = false;
+            PlayerYZ.GetComponent<Rigidbody>().useGravity = false;
+            camXY.enabled = false;
+            camXZ.enabled = true;
+            camYZ.enabled = false;
+        }
+        if (startCam == "YZ")
+        {
+            PlayerXZ.GetComponent<Movement>().enabled = false;
+            PlayerXY.GetComponent<Movement>().enabled = false;
+            PlayerXY.GetComponent<Rigidbody>().useGravity = false;
+            PlayerXZ.GetComponent<Rigidbody>().useGravity = false;
+            camXY.enabled = false;
+            camXZ.enabled = false;
+            camYZ.enabled = true;
         }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Winner
+  - Spoke
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class LevelSetup : MonoBehaviour
     private Color XY = new Color(1, 0, 0);
     private Color YZ = new Color(0, 1, 0);
     private Color XZ = new Color(0, 0, 1);
+    [SerializeField] private string StartLevel;
 
     void Start()
     {
@@ -45,8 +46,8 @@ public class LevelSetup : MonoBehaviour
     }
     void StartLevelCamPos()
     {
-        CameraChange.CamDir = "camXY";
-        player.GetComponent<Movement>().dir = "XY";
-        CameraMovement.ActiveCam = "XY";
+        CameraChange.CamDir = "cam" + StartLevel;
+        player.GetComponent<Movement>().dir = StartLevel;
+        CameraMovement.ActiveCam = StartLevel;
     }
 }
