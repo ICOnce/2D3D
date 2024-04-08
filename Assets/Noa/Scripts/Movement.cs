@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Movement : MonoBehaviour
     private float speed;
     public float baseSpeed;
     [SerializeField] private float jumpForce;
+    [SerializeField] private int Level;
     public Animator animator;
     private Rigidbody rb;
     private bool onGround;
@@ -28,8 +30,7 @@ public class Movement : MonoBehaviour
             onGround = true;
             if (hit.transform.tag == "Winner")
             {
-                //SceneManager.LoadScene("Level" + Level)
-                Debug.Log("winner!");
+                SceneManager.LoadScene("Level" + Level+1);
             }
         } else
         {
@@ -140,8 +141,6 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
-
     public void SetDir(string direction)
     {
         dir = direction;
