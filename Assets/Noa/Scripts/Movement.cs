@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     public float baseSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private int Level;
+    [SerializeField] private Transform PlayerXY, PlayerYZ, PlayerXZ;
     public Animator animator;
     private Rigidbody rb;
     private bool onGround;
@@ -32,7 +33,7 @@ public class Movement : MonoBehaviour
             {
                 SceneManager.LoadScene("Level" + (Level+1));
             }
-            if (hit.transform.tag == "Spoke" /*&& transform.name == "Player" + transform.GetComponent<Death>().startCam*/)
+            if (hit.transform.tag == "Spoke")
             {
                 transform.GetComponent<Death>().DeathActivate();
             }

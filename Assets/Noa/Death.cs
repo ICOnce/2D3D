@@ -5,15 +5,19 @@ using UnityEngine;
 public class Death : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Vector3 startPos;
-    private Quaternion startRot;
+    private Vector3 startPosXY, startPosXZ, startPosYZ;
+    private Quaternion startRotXY, startRotXZ, startRotYZ;
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject PlayerXY, PlayerXZ, PlayerYZ;
     public string startCam;
     void Start()
     {
-        startPos = transform.position;
-        startRot = transform.rotation;
+        startPosXY = PlayerXY.transform.position;
+        startRotXY = PlayerXY.transform.rotation;
+        startPosXZ = PlayerXZ.transform.position;
+        startRotXZ = PlayerXZ.transform.rotation;
+        startPosYZ = PlayerYZ.transform.position;
+        startRotYZ = PlayerYZ.transform.rotation;
     }
 
     // Update is called once per frame
@@ -27,11 +31,6 @@ public class Death : MonoBehaviour
     public void DeathActivate()
     {
         CameraChange.CamDir = startCam;
-        transform.GetComponent<Movement>().dir = startCam;
-        transform.position = startPos;
-        transform.rotation = startRot;
-        transform.GetComponent<Movement>().enabled = true;
-        transform.GetComponent<Rigidbody>().useGravity = true;
         if (startCam == "XY")
         {
             PlayerXZ.GetComponent<Movement>().enabled = false;
@@ -41,6 +40,12 @@ public class Death : MonoBehaviour
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
+            PlayerXY.GetComponent<Movement>().dir = startCam;
+            PlayerXY.transform.position = startPosXY;
+            PlayerXY.transform.rotation = startRotXY;
+            PlayerXY.GetComponent<Movement>().enabled = true;
+            PlayerXY.GetComponent<Rigidbody>().useGravity = true;
+            PlayerXY.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         else if (startCam == "XZ")
         {
@@ -51,6 +56,12 @@ public class Death : MonoBehaviour
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
+            PlayerXZ.GetComponent<Movement>().dir = startCam;
+            PlayerXZ.transform.position = startPosXZ;
+            PlayerXZ.transform.rotation = startRotXZ;
+            PlayerXZ.GetComponent<Movement>().enabled = true;
+            PlayerXZ.GetComponent<Rigidbody>().useGravity = true;
+            PlayerXZ.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
         if (startCam == "YZ")
         {
@@ -61,6 +72,12 @@ public class Death : MonoBehaviour
             camXY.enabled = false;
             camXZ.enabled = false;
             camYZ.enabled = true;
+            PlayerYZ.GetComponent<Movement>().dir = startCam;
+            PlayerYZ.transform.position = startPosYZ;
+            PlayerYZ.transform.rotation = startRotYZ;
+            PlayerYZ.GetComponent<Movement>().enabled = true;
+            PlayerYZ.GetComponent<Rigidbody>().useGravity = true;
+            PlayerYZ.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 }

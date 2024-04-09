@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 198476324749889960}
   - component: {fileID: 1000366546313334872}
   - component: {fileID: 6193420107064245826}
-  - component: {fileID: 2987211337778820466}
   m_Layer: 0
   m_Name: Top
   m_TagString: Winner
@@ -106,18 +105,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2987211337778820466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3573818877642856594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 067429de195c7ed4d9fc8b509889c5d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5104748614998256787
 GameObject:
   m_ObjectHideFlags: 0
