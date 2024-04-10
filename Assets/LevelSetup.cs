@@ -10,22 +10,26 @@ public class LevelSetup : MonoBehaviour
     private Color YZ = new Color(0, 1, 0);
     private Color XZ = new Color(0, 0, 1);
     [SerializeField] private string StartLevel;
+    public int Index;
 
     void Start()
     {
         GameObject LevelXY = Instantiate(LevelHolder);
         GameObject LevelYZ = Instantiate(LevelHolder);
         GameObject LevelXZ = Instantiate(LevelHolder);
-        LevelXY.transform.position = new Vector3(500, 0, 0);
-        LevelYZ.transform.position = new Vector3(0, 0, 500);
+        LevelXY.name = "LevelXY";
+        LevelYZ.name = "LevelYZ";
+        LevelXZ.name = "LevelXZ";
+        LevelYZ.transform.position = new Vector3(500, 0, 0);
+        LevelXY.transform.position = new Vector3(0, 0, 500);
         LevelXZ.transform.position = new Vector3(-500, 0, 0);
-        foreach (Transform child in LevelXY.transform)
+        foreach (Transform child in LevelYZ.transform)
         {
             child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
             if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = XY;
             else child.GetChild(0).GetComponent<Renderer>().material.color = XY;
         }
-        foreach (Transform child in LevelYZ.transform)
+        foreach (Transform child in LevelXY.transform)
         {
             child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
             if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = YZ;
@@ -42,7 +46,7 @@ public class LevelSetup : MonoBehaviour
     }
     void Update()
     {
-        
+
     }
     void StartLevelCamPos()
     {
