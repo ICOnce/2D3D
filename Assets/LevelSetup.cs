@@ -6,8 +6,8 @@ public class LevelSetup : MonoBehaviour
    
 { 
     public GameObject player, LevelHolder;
-    private Color XY = new Color(1, 0, 0);
-    private Color YZ = new Color(0, 1, 0);
+    private Color YZ = new Color(1, 0, 0);
+    private Color XY = new Color(0, 1, 0);
     private Color XZ = new Color(0, 0, 1);
     [SerializeField] private string StartLevel;
     public int Index;
@@ -15,25 +15,25 @@ public class LevelSetup : MonoBehaviour
     void Start()
     {
         GameObject LevelXY = Instantiate(LevelHolder);
-        GameObject LevelYZ = Instantiate(LevelHolder);
         GameObject LevelXZ = Instantiate(LevelHolder);
-        LevelXY.name = "LevelXY";
-        LevelYZ.name = "LevelYZ";
         LevelXZ.name = "LevelXZ";
-        LevelYZ.transform.position = new Vector3(500, 0, 0);
         LevelXY.transform.position = new Vector3(0, 0, 500);
+        LevelXY.name = "LevelXY";
         LevelXZ.transform.position = new Vector3(-500, 0, 0);
+        GameObject LevelYZ = Instantiate(LevelHolder);
+        LevelYZ.name = "LevelYZ";
+        LevelYZ.transform.position = new Vector3(500, 0, 0);
         foreach (Transform child in LevelYZ.transform)
         {
             child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
-            if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = XY;
-            else child.GetChild(0).GetComponent<Renderer>().material.color = XY;
+            if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = YZ;
+            else child.GetChild(0).GetComponent<Renderer>().material.color = YZ;
         }
         foreach (Transform child in LevelXY.transform)
         {
             child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
-            if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = YZ;
-            else child.GetChild(0).GetComponent<Renderer>().material.color = YZ;
+            if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = XY;
+            else child.GetChild(0).GetComponent<Renderer>().material.color = XY;
         }
         foreach (Transform child in LevelXZ.transform)
         {
