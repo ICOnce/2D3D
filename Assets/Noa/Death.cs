@@ -54,6 +54,7 @@ public class Death : MonoBehaviour
             PlayerXY.GetComponent<Movement>().enabled = true;
             PlayerXY.GetComponent<Rigidbody>().useGravity = true;
             PlayerXY.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameMaster.GetComponent<CameraChange>().currentPlayer = PlayerXY.transform;
         }
         else if (startCam == "XZ")
         {
@@ -71,6 +72,7 @@ public class Death : MonoBehaviour
             PlayerXZ.GetComponent<Movement>().enabled = true;
             PlayerXZ.GetComponent<Rigidbody>().useGravity = true;
             PlayerXZ.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameMaster.GetComponent<CameraChange>().currentPlayer = PlayerXZ.transform;
         }
         if (startCam == "YZ")
         {
@@ -88,6 +90,7 @@ public class Death : MonoBehaviour
             PlayerYZ.GetComponent<Movement>().enabled = true;
             PlayerYZ.GetComponent<Rigidbody>().useGravity = true;
             PlayerYZ.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            gameMaster.GetComponent<CameraChange>().currentPlayer = PlayerYZ.transform;
         }
     }
 }
