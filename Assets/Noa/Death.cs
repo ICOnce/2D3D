@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Death : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Store start position of players
     private Vector3 startPosXY, startPosXZ, startPosYZ;
+    // Store start rotation of players
     private Quaternion startRotXY, startRotXZ, startRotYZ;
+    // Variables that need to be assigned in the editor, but inaccessible to other scripts
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject PlayerXY, PlayerXZ, PlayerYZ;
     [SerializeField] private GameObject gameMaster;
+    //Variable to set the startCam in editor
     public string startCam;
     void Start()
     {
+        // Set values for start positions and rotations
         startPosXY = PlayerXY.transform.position;
         startRotXY = PlayerXY.transform.rotation;
         startPosXZ = PlayerXZ.transform.position;
@@ -20,10 +24,9 @@ public class Death : MonoBehaviour
         startPosYZ = PlayerYZ.transform.position;
         startRotYZ = PlayerYZ.transform.rotation;
     }
-
-    // Update is called once per frame
     void Update()
     {
+        // Check if player has fallen far enough to die
         if (transform.position.y < -20 && transform.name == "Player" + startCam)
         {
             DeathActivate();
@@ -31,7 +34,10 @@ public class Death : MonoBehaviour
     }
     public void DeathActivate()
     {
+        // Set camera direction from CameraChange script to startCam
         CameraChange.CamDir = startCam;
+
+        // If statement to check which startCam you have, to make sure you're set back to the correct one
         if (startCam == "XY")
         {
             gameMaster.GetComponent<UIHandler>().SetCam(camXY);
