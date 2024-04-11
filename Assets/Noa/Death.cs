@@ -12,6 +12,7 @@ public class Death : MonoBehaviour
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject PlayerXY, PlayerXZ, PlayerYZ;
     [SerializeField] private GameObject gameMaster;
+    [SerializeField] private GameObject deathEffect;
     //Variable to set the startCam in editor
     public string startCam;
     void Start()
@@ -27,8 +28,13 @@ public class Death : MonoBehaviour
     void Update()
     {
         // Check if player has fallen far enough to die
+        if (transform.position.y < -10 && transform.name == "Player" + startCam)
+        {
+            deathEffect.SetActive(true);
+        }
         if (transform.position.y < -20 && transform.name == "Player" + startCam)
         {
+            deathEffect.SetActive(false);
             DeathActivate();
         }
     }
