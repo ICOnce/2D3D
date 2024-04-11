@@ -15,6 +15,7 @@ public class CameraChange : MonoBehaviour
     private Vector3 Down = new Vector3(0, -10000, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
     private int maxDist = 250;
     public Transform playerYZ, playerXZ, playerXY;
+    [SerializeField] private Transform currentPlayer;
     private string PrevDir;
     private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
     private void Start()
@@ -40,13 +41,14 @@ public class CameraChange : MonoBehaviour
             playerXZ.transform.position = playerYZ.transform.position + new Vector3(-1000, 0, 0);
         }
         PrevDir = CamDir;
-        if (Input.GetKeyDown("1") && CamDir != "camXY")
+        if (Input.GetKeyDown("1") && CamDir != "camXY" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerXY.position, "XY") == false) return;
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
             CamDir ="camXY";
+            currentPlayer = playerXY;
             GetComponent<UIHandler>().SetCam(camXY);
             playerXY.GetComponent<Movement>().enabled = true;
             playerXZ.GetComponent<Movement>().enabled = false;
@@ -60,13 +62,14 @@ public class CameraChange : MonoBehaviour
                 GetTheHeight();
             }
         }
-        else if (Input.GetKeyDown("2") && CamDir != "camXZ")
+        else if (Input.GetKeyDown("2") && CamDir != "camXZ" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerXZ.position, "XZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = true;
             camYZ.enabled = false;
             CamDir = "camXZ";
+            currentPlayer = playerXZ;
             GetComponent<UIHandler>().SetCam(camXZ);
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = true;
@@ -76,7 +79,7 @@ public class CameraChange : MonoBehaviour
             playerYZ.GetComponent<Rigidbody>().useGravity = false;
             CameraMovement.ActiveCam = "XZ";
         }
-        else if (Input.GetKeyDown("3") && CamDir != "camYZ")
+        else if (Input.GetKeyDown("3") && CamDir != "camYZ" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerYZ.position, "YZ") == false)
             {
@@ -86,6 +89,7 @@ public class CameraChange : MonoBehaviour
             camXZ.enabled = false;
             camYZ.enabled = true;
             CamDir = "camYZ";
+            currentPlayer = playerYZ;
             GetComponent<UIHandler>().SetCam(camYZ);
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = false;
@@ -162,14 +166,52 @@ public class CameraChange : MonoBehaviour
     private void GetTheHeight()
     {
         float shortDist=500000;
-        Transform shortPlat = playerXY;
+        float YHeight=0;
+        Vector3 Height = playerXZ.transform.position + new Vector3(500, 100, 0);
+        rayD1 = new Ray(Height + NE, Down);
+        rayD2 = new Ray(Height + NW, Down);
+        rayD3 = new Ray(Height + SE, Down);
+        rayD4 = new Ray(Height + SW, Down);
+        if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
+        {
+            if (Height.y - hitXY1.transform.position.y < shortDist)
+            {
+                shortDist = Height.y - hitXY1.transform.position.y;
+                YHeight = hitXY1.transform.position.y+hitXY1.transform.localScale.y/2;
+            }
+        }
+        if (Physics.Raycast(rayD2, out RaycastHit hitXY2, maxDistance))
+        {
+            if (Height.y - hitXY2.transform.position.y < shortDist)
+            {
+                shortDist = Height.y - hitXY2.transform.position.y;
+                YHeight = hitXY2.transform.position.y + hitXY2.transform.localScale.y / 2;
+            }
+        }
+        if (Physics.Raycast(rayD3, out RaycastHit hitXY3, maxDistance))
+        {
+            if (Height.y - hitXY3.transform.position.y < shortDist)
+            {
+                shortDist = Height.y - hitXY3.transform.position.y;
+                YHeight = hitXY3.transform.position.y + hitXY3.transform.localScale.y / 2;
+            }
+        }
+        if (Physics.Raycast(rayD4, out RaycastHit hitXY4, maxDistance))
+        {
+            if (Height.y - hitXY4.transform.position.y < shortDist)
+            {
+                shortDist = Height.y - hitXY4.transform.position.y;
+                YHeight = hitXY4.transform.position.y + hitXY4.transform.localScale.y / 2;
+            }
+        }
+        if (CamDir == "camXY") playerXY.transform.position = new Vector3(playerXY.transform.position.x, YHeight + 1.2f, playerXY.transform.position.z);
+        if (CamDir == "camYZ") playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, YHeight + 1.2f, playerYZ.transform.position.z);
+        
+        /*Transform shortPlat = playerXY;
         if (CamDir == "camXY")
         {
             Vector3 Height = playerXY.transform.position + new Vector3 (0,100,0);
-            rayD1 = new Ray(Height + NE, Down);
-            rayD2 = new Ray(Height + NW, Down);
-            rayD3 = new Ray(Height + SE, Down);
-            rayD4 = new Ray(Height + SW, Down);
+            
             if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
             {
                 if (Height.y - hitXY1.transform.position.y < shortDist)
@@ -244,6 +286,6 @@ public class CameraChange : MonoBehaviour
                 }
             }
             playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, shortPlat.transform.position.y + shortPlat.transform.localScale.y / 2 + 0.5f, playerYZ.transform.position.z);
-        }
+        }*/
     }
 }

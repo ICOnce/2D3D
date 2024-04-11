@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform PlayerXY, PlayerYZ, PlayerXZ;
     public Animator animator;
     private Rigidbody rb;
-    private bool onGround;
+    public bool onGround;
     
     public string dir;
     

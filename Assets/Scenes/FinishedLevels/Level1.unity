@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427182, b: 0.5645241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3542,6 +3542,7 @@ MonoBehaviour:
   playerYZ: {fileID: 130231061}
   playerXZ: {fileID: 1093569420}
   playerXY: {fileID: 783529233}
+  currentPlayer: {fileID: 783529233}
 --- !u!114 &1746391213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,6 +3579,7 @@ MonoBehaviour:
   YZ: {fileID: 2100000, guid: eeb93c46581762a488e10593442a7979, type: 2}
   XZ: {fileID: 2100000, guid: 5275bc46e0683c147bd2531aedb4ed8f, type: 2}
   canvas: {fileID: 368480706}
+  startCam: {fileID: 1308734962}
 --- !u!1 &1852275722
 GameObject:
   m_ObjectHideFlags: 0
