@@ -33,12 +33,32 @@ public class LevelSetup : MonoBehaviour
             child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
             if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = XY;
             else child.GetChild(0).GetComponent<Renderer>().material.color = XY;
+            if (child.tag == "PlatformXZ")
+            {
+                child.GetComponent<Renderer>().material.color = XZ;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
+            if (child.tag == "PlatformYZ")
+            {
+                child.GetComponent<Renderer>().material.color = YZ;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
         }
         foreach (Transform child in LevelYZ.transform)
         {
             child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
             if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = YZ;
             else child.GetChild(0).GetComponent<Renderer>().material.color = YZ;
+            if (child.tag == "PlatformXZ")
+            {
+                child.GetComponent<Renderer>().material.color = XZ;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
+            if (child.tag == "PlatformXY")
+            {
+                child.GetComponent<Renderer>().material.color = XY;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
         }
         foreach (Transform child in LevelXZ.transform)
         {
@@ -46,7 +66,19 @@ public class LevelSetup : MonoBehaviour
             child.transform.position = new Vector3(child.transform.position.x, 0, child.transform.position.z);
             if (child.tag == "Platform") child.GetComponent<Renderer>().material.color = XZ;
             else child.GetChild(0).GetComponent<Renderer>().material.color = XZ;
+            if (child.tag == "PlatformXY")
+            {
+                child.GetComponent<Renderer>().material.color = XY;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
+            if (child.tag == "PlatformYZ")
+            {
+                child.GetComponent<Renderer>().material.color = YZ;
+                child.GetComponent<BoxCollider>().enabled = false;
+            }
         }
+
+        //setting some start parameters in other scripts
         CameraChange.CamDir = "cam" + StartLevel;
         startPlayer.GetComponent<Movement>().dir = StartLevel;
         CameraMovement.ActiveCam = StartLevel;

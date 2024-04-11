@@ -1258,11 +1258,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!1 &670618214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 469608460073333128, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
-  m_PrefabInstance: {fileID: 780707929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &678437201
 GameObject:
   m_ObjectHideFlags: 0
@@ -3521,7 +3516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf50f70b7c038442bc5767d7c304640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 670618214}
+  startPlayer: {fileID: 375521391}
   LevelHolder: {fileID: 1620537324}
   StartLevel: XY
 --- !u!114 &1746391212
@@ -3536,13 +3531,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985d4a52ccefd27489b154174ee487e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camXY: {fileID: 1308734962}
-  camXZ: {fileID: 1116007588}
-  camYZ: {fileID: 1898829934}
   playerYZ: {fileID: 130231061}
   playerXZ: {fileID: 1093569420}
   playerXY: {fileID: 783529233}
   currentPlayer: {fileID: 783529233}
+  camXY: {fileID: 1308734962}
+  camXZ: {fileID: 1116007588}
+  camYZ: {fileID: 1898829934}
 --- !u!114 &1746391213
 MonoBehaviour:
   m_ObjectHideFlags: 0

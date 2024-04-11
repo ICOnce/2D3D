@@ -9,19 +9,18 @@ using UnityEngine.UIElements;
 public class CameraChange : MonoBehaviour
 {
     public static string CamDir;
-    [SerializeField] private Camera camXY, camXZ, camYZ;
-    Ray ray, rayD1, rayD2, rayD3, rayD4, rayW1, rayW2, rayE1, rayE2, rayN1, rayN2, rayS1, rayS2, rayU1, rayU2, rayU3, rayU4;
-    float maxDistance = 1000;
-    private Vector3 Down = new Vector3(0, -10000, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
-    private int maxDist = 250;
-    public Transform playerYZ, playerXZ, playerXY;
-    public Transform currentPlayer;
-    private string PrevDir;
-    private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
-    private void Start()
-    {
+    public Transform playerYZ, playerXZ, playerXY, currentPlayer;
 
-    }
+    [SerializeField] private Camera camXY, camXZ, camYZ;
+    private float maxDistance = 1000;
+    private int maxDist = 250;
+    private string PrevDir;
+
+    //Setting the vectors for the rays & the rays
+    private Vector3 Down = new Vector3(0, -10000, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
+    Ray ray, rayD1, rayD2, rayD3, rayD4, rayW1, rayW2, rayE1, rayE2, rayN1, rayN2, rayS1, rayS2, rayU1, rayU2, rayU3, rayU4;
+    private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
+
     void Update()
     {
         Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
@@ -41,8 +40,6 @@ public class CameraChange : MonoBehaviour
             playerXZ.transform.position = playerYZ.transform.position + new Vector3(-1000, 0, 0);
         }
         PrevDir = CamDir;
-        Debug.Log(currentPlayer);
-        Debug.Log(currentPlayer.GetComponent<Movement>().onGround);
         if (Input.GetKeyDown("1") && CamDir != "camXY" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerXY.position, "XY") == false) return;
@@ -208,86 +205,5 @@ public class CameraChange : MonoBehaviour
         }
         if (CamDir == "camXY") playerXY.transform.position = new Vector3(playerXY.transform.position.x, YHeight + 1.2f, playerXY.transform.position.z);
         if (CamDir == "camYZ") playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, YHeight + 1.2f, playerYZ.transform.position.z);
-        
-        /*Transform shortPlat = playerXY;
-        if (CamDir == "camXY")
-        {
-            Vector3 Height = playerXY.transform.position + new Vector3 (0,100,0);
-            
-            if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
-            {
-                if (Height.y - hitXY1.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitXY1.transform.position.y;
-                    shortPlat = hitXY1.transform;
-                }
-            }
-            if (Physics.Raycast(rayD2, out RaycastHit hitXY2, maxDistance))
-            {
-                if (Height.y - hitXY2.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitXY2.transform.position.y;
-                    shortPlat = hitXY2.transform;
-                }
-            }
-            if (Physics.Raycast(rayD3, out RaycastHit hitXY3, maxDistance))
-            {
-                if (Height.y - hitXY3.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitXY3.transform.position.y;
-                    shortPlat = hitXY3.transform;
-                }
-            }
-            if (Physics.Raycast(rayD4, out RaycastHit hitXY4, maxDistance))
-            {
-                if (Height.y - hitXY4.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitXY4.transform.position.y;
-                    shortPlat = hitXY4.transform;
-                }
-            }
-            playerXY.transform.position = new Vector3(playerXY.transform.position.x, shortPlat.transform.position.y + shortPlat.transform.localScale.y / 2 + 0.5f, playerXY.transform.position.z);
-        }
-        if (CamDir == "camYZ")
-        {
-            Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
-            rayD1 = new Ray(Height + NE, Down);
-            rayD2 = new Ray(Height + NW, Down);
-            rayD3 = new Ray(Height + SE, Down);
-            rayD4 = new Ray(Height + SW, Down);
-            if (Physics.Raycast(rayD1, out RaycastHit hitYZ1, maxDist))
-            {
-                if (Height.y - hitYZ1.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitYZ1.transform.position.y;
-                    shortPlat = hitYZ1.transform;
-                }
-            }
-            if (Physics.Raycast(rayD2, out RaycastHit hitYZ2, maxDist))
-            {
-                if (Height.y - hitYZ2.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitYZ2.transform.position.y;
-                    shortPlat = hitYZ2.transform;
-                }
-            }
-            if (Physics.Raycast(rayD3, out RaycastHit hitYZ3, maxDist))
-            {
-                if (Height.y - hitYZ3.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitYZ3.transform.position.y;
-                    shortPlat = hitYZ3.transform;
-                }
-            }
-            if (Physics.Raycast(rayD4, out RaycastHit hitYZ4, maxDist))
-            {
-                if (Height.y - hitYZ4.transform.position.y < shortDist)
-                {
-                    shortDist = Height.y - hitYZ4.transform.position.y;
-                    shortPlat = hitYZ4.transform;
-                }
-            }
-            playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, shortPlat.transform.position.y + shortPlat.transform.localScale.y / 2 + 0.5f, playerYZ.transform.position.z);
-        }*/
     }
 }

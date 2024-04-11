@@ -7,6 +7,9 @@ TagManager:
   - Platform
   - Winner
   - Spoke
+  - PlatformXY
+  - PlatformXZ
+  - PlatformYZ
   layers:
   - Default
   - TransparentFX

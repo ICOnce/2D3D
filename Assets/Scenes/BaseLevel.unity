@@ -230,6 +230,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXY
+      value: 
+      objectReference: {fileID: 1308734962}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXZ
+      value: 
+      objectReference: {fileID: 1116007588}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camYZ
+      value: 
+      objectReference: {fileID: 1898829934}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: startCam
+      value: XY
+      objectReference: {fileID: 0}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: gameMaster
+      value: 
+      objectReference: {fileID: 1746391208}
     - target: {fileID: 1328743291306213120, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -283,8 +315,20 @@ PrefabInstance:
       value: XZ
       objectReference: {fileID: 0}
     - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8857179073672020042, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Name
@@ -303,6 +347,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXY
+      value: 
+      objectReference: {fileID: 1308734962}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXZ
+      value: 
+      objectReference: {fileID: 1116007588}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camYZ
+      value: 
+      objectReference: {fileID: 1898829934}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: startCam
+      value: XY
+      objectReference: {fileID: 0}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: gameMaster
+      value: 
+      objectReference: {fileID: 1746391208}
     - target: {fileID: 1328743291306213120, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -356,6 +432,18 @@ PrefabInstance:
       value: XY
       objectReference: {fileID: 0}
     - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -385,6 +473,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXY
+      value: 
+      objectReference: {fileID: 1308734962}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camXZ
+      value: 
+      objectReference: {fileID: 1116007588}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: camYZ
+      value: 
+      objectReference: {fileID: 1898829934}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 2030980605}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: startCam
+      value: XY
+      objectReference: {fileID: 0}
+    - target: {fileID: -5016359121723861763, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: gameMaster
+      value: 
+      objectReference: {fileID: 1746391208}
     - target: {fileID: 1328743291306213120, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -435,11 +555,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: dir
-      value: ZY
+      value: YZ
       objectReference: {fileID: 0}
     - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXY
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerXZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+      propertyPath: PlayerYZ
+      value: 
+      objectReference: {fileID: 783529233}
+    - target: {fileID: 7323555096778134284, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8857179073672020042, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
       propertyPath: m_Name
@@ -555,11 +687,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635091875}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &670618214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 469608460073333128, guid: 84cc59e214e22c243b43b0aca7e32054, type: 3}
-  m_PrefabInstance: {fileID: 780707929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &780707929
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -655,7 +782,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116007586}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1075,8 +1202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf50f70b7c038442bc5767d7c304640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 670618214}
+  startPlayer: {fileID: 2030980605}
   LevelHolder: {fileID: 1620537324}
+  StartLevel: XY
 --- !u!114 &1746391212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,12 +1217,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985d4a52ccefd27489b154174ee487e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camXY: {fileID: 1308734962}
-  camXZ: {fileID: 1116007588}
-  camYZ: {fileID: 1898829934}
   playerYZ: {fileID: 130231061}
   playerXZ: {fileID: 1093569420}
   playerXY: {fileID: 783529233}
+  currentPlayer: {fileID: 783529233}
+  camXY: {fileID: 1308734962}
+  camXZ: {fileID: 1116007588}
+  camYZ: {fileID: 1898829934}
 --- !u!114 &1746391213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1266,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898829932}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1290,6 +1419,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2030980605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8857179073672020042, guid: 233a18d472ed9024395c4edae0cc265e, type: 3}
+  m_PrefabInstance: {fileID: 510219828}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
