@@ -9,7 +9,6 @@ public class Death : MonoBehaviour
     private Quaternion startRotXY, startRotXZ, startRotYZ;
     [SerializeField] private Camera camXY, camXZ, camYZ;
     [SerializeField] private GameObject PlayerXY, PlayerXZ, PlayerYZ;
-    [SerializeField] private GameObject gameMaster;
     public string startCam;
     void Start()
     {
@@ -34,7 +33,6 @@ public class Death : MonoBehaviour
         CameraChange.CamDir = startCam;
         if (startCam == "XY")
         {
-            gameMaster.GetComponent<UIHandler>().SetCam(camXY);
             PlayerXZ.GetComponent<Movement>().enabled = false;
             PlayerYZ.GetComponent<Movement>().enabled = false;
             PlayerXZ.GetComponent<Rigidbody>().useGravity = false;
@@ -51,7 +49,6 @@ public class Death : MonoBehaviour
         }
         else if (startCam == "XZ")
         {
-            gameMaster.GetComponent<UIHandler>().SetCam(camXZ);
             PlayerXY.GetComponent<Movement>().enabled = false;
             PlayerYZ.GetComponent<Movement>().enabled = false;
             PlayerXY.GetComponent<Rigidbody>().useGravity = false;
@@ -68,7 +65,6 @@ public class Death : MonoBehaviour
         }
         if (startCam == "YZ")
         {
-            gameMaster.GetComponent<UIHandler>().SetCam(camYZ);
             PlayerXZ.GetComponent<Movement>().enabled = false;
             PlayerXY.GetComponent<Movement>().enabled = false;
             PlayerXY.GetComponent<Rigidbody>().useGravity = false;

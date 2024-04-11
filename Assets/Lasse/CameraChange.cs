@@ -47,7 +47,6 @@ public class CameraChange : MonoBehaviour
             camXZ.enabled = false;
             camYZ.enabled = false;
             CamDir ="camXY";
-            GetComponent<UIHandler>().SetCam(camXY);
             playerXY.GetComponent<Movement>().enabled = true;
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = false;
@@ -67,7 +66,6 @@ public class CameraChange : MonoBehaviour
             camXZ.enabled = true;
             camYZ.enabled = false;
             CamDir = "camXZ";
-            GetComponent<UIHandler>().SetCam(camXZ);
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = true;
             playerYZ.GetComponent<Movement>().enabled = false;
@@ -86,7 +84,6 @@ public class CameraChange : MonoBehaviour
             camXZ.enabled = false;
             camYZ.enabled = true;
             CamDir = "camYZ";
-            GetComponent<UIHandler>().SetCam(camYZ);
             playerXY.GetComponent<Movement>().enabled = false;
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = true;
