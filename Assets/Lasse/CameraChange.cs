@@ -15,7 +15,7 @@ public class CameraChange : MonoBehaviour
     private Vector3 Down = new Vector3(0, -10000, 0), West = new Vector3(0, 0, 1), East = new Vector3(0, 0, -1), Up = new Vector3(0, 1, 0), North = new Vector3(1, 0, 0), South = new Vector3(-1,0,0);
     private int maxDist = 250;
     public Transform playerYZ, playerXZ, playerXY;
-    [SerializeField] private Transform currentPlayer;
+    public Transform currentPlayer;
     private string PrevDir;
     private Vector3 NE = new Vector3(0.499f,-0.99f,0.499f), NW = new Vector3(0.499f, -0.99f, -0.499f), SE = new Vector3(-0.499f, -0.99f, 0.499f), SW = new Vector3(-0.499f, -0.99f, -0.499f);
     private void Start()
@@ -41,6 +41,8 @@ public class CameraChange : MonoBehaviour
             playerXZ.transform.position = playerYZ.transform.position + new Vector3(-1000, 0, 0);
         }
         PrevDir = CamDir;
+        Debug.Log(currentPlayer);
+        Debug.Log(currentPlayer.GetComponent<Movement>().onGround);
         if (Input.GetKeyDown("1") && CamDir != "camXY" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerXY.position, "XY") == false) return;
