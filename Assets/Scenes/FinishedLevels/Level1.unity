@@ -4346,6 +4346,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5104748614998256787, guid: 4403198c7c31c3a4ba102d5304dc26e9, type: 3}
+      propertyPath: m_TagString
+      value: Winner
+      objectReference: {fileID: 0}
     - target: {fileID: 7908762772415295241, guid: 4403198c7c31c3a4ba102d5304dc26e9, type: 3}
       propertyPath: m_TagString
       value: Platform
