@@ -8,9 +8,11 @@ using UnityEngine.UIElements;
 
 public class CameraChange : MonoBehaviour
 {
+    //Public variables
     public static string CamDir;
     public Transform playerYZ, playerXZ, playerXY, currentPlayer;
 
+    //Private variables
     [SerializeField] private Camera camXY, camXZ, camYZ;
     private float maxDistance = 1000;
     private int maxDist = 250;
@@ -102,6 +104,7 @@ public class CameraChange : MonoBehaviour
     }
     private bool CheckForCollider(Vector3 X, string newCamDir)
     {
+        Debug.Log(X);
         if (CamDir == "camXZ")
         {
             ray = new Ray(X + new Vector3(0,200,0), Down);
@@ -128,6 +131,21 @@ public class CameraChange : MonoBehaviour
         }
         if (newCamDir == "XZ")
         {
+            if (PrevDir == "camXY")
+            {
+                rayU1 = new Ray(playerXY.transform.position + NE, Up);
+                rayU2 = new Ray(playerXY.transform.position + NW, Up);
+                rayU3 = new Ray(playerXY.transform.position + SE, Up);
+                rayU4 = new Ray(playerXY.transform.position + SW, Up);
+            }
+            else if (PrevDir == "camYZ")
+            {
+                rayU1 = new Ray(playerXZ.transform.position + NE, Up);
+                rayU2 = new Ray(playerXZ.transform.position + NW, Up);
+                rayU3 = new Ray(playerXZ.transform.position + SE, Up);
+                rayU4 = new Ray(playerXZ.transform.position + SW, Up);
+            }
+            if (Physics.Raycast(rayU1, maxDist) || Physics.Raycast(rayU2, maxDist) || Physics.Raycast(rayU3, maxDist) || Physics.Raycast(rayU4, maxDist)) return false;
             rayD1 = new Ray(X + NE, Down);
             rayD2 = new Ray(X + NW, Down);
             rayD3 = new Ray(X + SE, Down);
@@ -138,6 +156,7 @@ public class CameraChange : MonoBehaviour
             rayU4 = new Ray(X + SW, Up);
             if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayU1, maxDist) && !Physics.Raycast(rayU2, maxDist) && !Physics.Raycast(rayU3, maxDist) && !Physics.Raycast(rayU4, maxDist))
             {
+                Debug.Log("true");
                 return true;
             }
         }
