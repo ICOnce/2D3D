@@ -150,10 +150,10 @@ public class CameraChange : MonoBehaviour
             }
             else if (PrevDir == "camYZ")
             {
-                rayU1 = new Ray(playerXZ.transform.position + NE, Up);
-                rayU2 = new Ray(playerXZ.transform.position + NW, Up);
-                rayU3 = new Ray(playerXZ.transform.position + SE, Up);
-                rayU4 = new Ray(playerXZ.transform.position + SW, Up);
+                rayU1 = new Ray(playerYZ.transform.position + NE, Up);
+                rayU2 = new Ray(playerYZ.transform.position + NW, Up);
+                rayU3 = new Ray(playerYZ.transform.position + SE, Up);
+                rayU4 = new Ray(playerYZ.transform.position + SW, Up);
             }
             //Check if the change is legal
             if (Physics.Raycast(rayU1, maxDist) || Physics.Raycast(rayU2, maxDist) || Physics.Raycast(rayU3, maxDist) || Physics.Raycast(rayU4, maxDist)) return false;

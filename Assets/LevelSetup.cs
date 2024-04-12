@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelSetup : MonoBehaviour
 
 {
     //Setting the colors for the levels, for less clutter later
-    private Color YZ = new Color(1, 0, 0);
-    private Color XY = new Color(0, 1, 0);
-    private Color XZ = new Color(0, 0, 1);
+    private Color YZ = new Color(1, 0, 0, 1f);
+    private Color XY = new Color(0, 1, 0, 1f);
+    private Color XZ = new Color(0, 0, 1, 1f);
+
+    [SerializeField] private Material matXY;
+    [SerializeField] private Material matXZ;
+    [SerializeField] private Material matYZ;
 
     //Setting private variables with SerializeField so they can be set in the editor
     [SerializeField] private GameObject startPlayer, LevelHolder;
@@ -41,13 +46,13 @@ public class LevelSetup : MonoBehaviour
             //Set color, collision, and smaller stretch on platforms that can not be seen from XY
             else if (child.tag == "PlatformXZ")
             {
-                child.GetComponent<Renderer>().material.color = XZ;
+                child.GetComponent<Renderer>().material =  matXZ;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(200, child.transform.localScale.y, child.transform.localScale.z);
             }
             else if (child.tag == "PlatformXY")
             {
-                child.GetComponent<Renderer>().material.color = XY;
+                child.GetComponent<Renderer>().material = matXY;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(200, child.transform.localScale.y, child.transform.localScale.z);
             }
@@ -60,13 +65,13 @@ public class LevelSetup : MonoBehaviour
             else if (child.tag == "Winner" || child.tag == "Spoke") child.GetChild(0).GetComponent<Renderer>().material.color = XY;
             if (child.tag == "PlatformXZ")
             {
-                child.GetComponent<Renderer>().material.color = XZ;
+                child.GetComponent<Renderer>().material = matXZ;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 200);
             }
             if (child.tag == "PlatformYZ")
             {
-                child.GetComponent<Renderer>().material.color = YZ;
+                child.GetComponent<Renderer>().material = matYZ;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 200);
             }
@@ -80,13 +85,13 @@ public class LevelSetup : MonoBehaviour
             else if (child.tag == "Winner" || child.tag == "Spoke") child.GetChild(0).GetComponent<Renderer>().material.color = XZ;
             if (child.tag == "PlatformXY")
             {
-                child.GetComponent<Renderer>().material.color = XY;
+                child.GetComponent<Renderer>().material = matXY;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(child.transform.localScale.x, 0.1f, child.transform.localScale.z);
             }
             if (child.tag == "PlatformYZ")
             {
-                child.GetComponent<Renderer>().material.color = YZ;
+                child.GetComponent<Renderer>().material = matYZ;
                 child.GetComponent<BoxCollider>().enabled = false;
                 child.transform.localScale = new Vector3(child.transform.localScale.x, 0.1f, child.transform.localScale.z);
             }
