@@ -26,7 +26,7 @@ public class LevelSetup : MonoBehaviour
         LevelXY.transform.position = new Vector3(0, 0, 500);
         LevelXZ.transform.position = new Vector3(-500, 0, 0);
 
-        //Three for loops to set the scale & colour of the three levels
+        //Three foreach loops to set the scale & colour of the three levels
         foreach (Transform child in LevelYZ.transform)
         {
             //Set the general scale to 500 on the ignored axis
