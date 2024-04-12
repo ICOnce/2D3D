@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
@@ -9,6 +10,7 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private Material XY, YZ, XZ;
     [SerializeField] private Canvas canvas;
     [SerializeField] private Camera startCam;
+    [SerializeField] private int Level;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,5 +59,10 @@ public class UIHandler : MonoBehaviour
             display1.GetComponent<Image>().material = XY;
             display2.GetComponent<Image>().material = YZ;
         }
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Level" + (Level + 1));
     }
 }

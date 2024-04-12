@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class Movement : MonoBehaviour
     public float baseSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private int Level;
-    [SerializeField] private Transform PlayerXY, PlayerYZ, PlayerXZ;
+    [SerializeField] private Transform camXY, camYZ, camXZ;
+    [SerializeField] private GameObject winCam;
+    [SerializeField] private GameObject topLeft, topRight;
+    [SerializeField] private Button winBtn;
+    [SerializeField] private Canvas canvas;
     public Animator animator;
     private Rigidbody rb;
     public bool onGround;
@@ -24,14 +29,21 @@ public class Movement : MonoBehaviour
     }
     void FixedUpdate()
     {
- 
+        winCam.transform.Rotate(0, 0.1f, 0);
         ray = new Ray(transform.position, -transform.up);
         if (Physics.Raycast(ray, out RaycastHit hit, 1.6f)) 
         {
             onGround = true;
             if (hit.transform.tag == "Winner")
             {
-                SceneManager.LoadScene("Level" + (Level+1));
+                camXY.GetComponent<Camera>().enabled = false;
+                camXY.GetComponent<Camera>().enabled = false;
+                camXY.GetComponent<Camera>().enabled = false;
+                winCam.GetComponentInChildren<Camera>().enabled = true;
+                topLeft.SetActive(false);
+                topRight.SetActive(false);
+                winBtn.gameObject.SetActive(true);
+                canvas.GetComponent<Canvas>().worldCamera = winCam.GetComponent<Camera>();
             }
             if (hit.transform.tag == "Spoke")
             {
