@@ -25,7 +25,7 @@ public class CameraChange : MonoBehaviour
 
     void Update()
     {
-        Vector3 Height = playerYZ.transform.position + new Vector3(0, 100, 0);
+        //Set position of non-current players
         if (camXY.enabled == true)
         {
             playerYZ.transform.position = playerXY.transform.position + new Vector3(500, 0, -500);
@@ -41,28 +41,42 @@ public class CameraChange : MonoBehaviour
             playerXY.transform.position = playerYZ.transform.position + new Vector3(-500, 0, 500);
             playerXZ.transform.position = playerYZ.transform.position + new Vector3(-1000, 0, 0);
         }
+        
+        //save current direction of camera
         PrevDir = CamDir;
+
+        //Attempt to change camera to XY
         if (Input.GetKeyDown("1") && CamDir != "camXY" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
+            //Check if the move is legal, if not stop here
             if (CheckForCollider(playerXY.position, "XY") == false) return;
+
+            //Change active camera
             camXY.enabled = true;
             camXZ.enabled = false;
             camYZ.enabled = false;
+
+            //Remember the active camera & player
             CamDir ="camXY";
             currentPlayer = playerXY;
             GetComponent<UIHandler>().SetCam(camXY);
+            CameraMovement.ActiveCam = "XY";
+
+            //disable/enable movementscrips & gravity
             playerXY.GetComponent<Movement>().enabled = true;
             playerXZ.GetComponent<Movement>().enabled = false;
             playerYZ.GetComponent<Movement>().enabled = false;
             playerXY.GetComponent<Rigidbody>().useGravity = true;
             playerXZ.GetComponent<Rigidbody>().useGravity = false;
             playerYZ.GetComponent<Rigidbody>().useGravity = false;
-            CameraMovement.ActiveCam = "XY";
+
+            //Figure out the height of the player if the previous was the XZ plane
             if (PrevDir == "camXZ")
             {
                 GetTheHeight();
             }
         }
+        //Attempt to change camera to XZ (works similar to XY, but does less)
         else if (Input.GetKeyDown("2") && CamDir != "camXZ" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
             if (CheckForCollider(playerXZ.position, "XZ") == false) return;
@@ -80,12 +94,10 @@ public class CameraChange : MonoBehaviour
             playerYZ.GetComponent<Rigidbody>().useGravity = false;
             CameraMovement.ActiveCam = "XZ";
         }
+        //Attempt to change camera to YZ (works the same as XY)
         else if (Input.GetKeyDown("3") && CamDir != "camYZ" && currentPlayer.GetComponent<Movement>().onGround == true)
         {
-            if (CheckForCollider(playerYZ.position, "YZ") == false)
-            {
-                return;
-            }
+            if (CheckForCollider(playerYZ.position, "YZ") == false) return;
             camXY.enabled = false;
             camXZ.enabled = false;
             camYZ.enabled = true;
@@ -104,14 +116,10 @@ public class CameraChange : MonoBehaviour
     }
     private bool CheckForCollider(Vector3 X, string newCamDir)
     {
-        Debug.Log(X);
-        if (CamDir == "camXZ")
-        {
-            ray = new Ray(X + new Vector3(0,200,0), Down);
-            if (Physics.Raycast(ray, out RaycastHit hit, maxDist)) X = hit.point + new Vector3(0,1,0);
-        }
+        //First check what cameraview the player wants to change to
         if (newCamDir == "XY")
         {
+            //Set the proper Rays based on the viewpoint
             rayD1 = new Ray(X + NE, Down);
             rayD2 = new Ray(X + NW, Down);
             rayD3 = new Ray(X + SE, Down);
@@ -120,6 +128,7 @@ public class CameraChange : MonoBehaviour
             rayE2 = new Ray(X + NE, East);
             rayW1 = new Ray(X + SW, West);
             rayW2 = new Ray(X + NW, West);
+            //Check if the move is legal via rays
             if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayE1, maxDist) && !Physics.Raycast(rayE2, maxDist) && !Physics.Raycast(rayW1, maxDist) && !Physics.Raycast(rayW2, maxDist))
             {               
                 return true;
@@ -131,6 +140,7 @@ public class CameraChange : MonoBehaviour
         }
         if (newCamDir == "XZ")
         {
+            //If the desired plane is XZ, set up rays to check above the old direction
             if (PrevDir == "camXY")
             {
                 rayU1 = new Ray(playerXY.transform.position + NE, Up);
@@ -145,7 +155,10 @@ public class CameraChange : MonoBehaviour
                 rayU3 = new Ray(playerXZ.transform.position + SE, Up);
                 rayU4 = new Ray(playerXZ.transform.position + SW, Up);
             }
+            //Check if the change is legal
             if (Physics.Raycast(rayU1, maxDist) || Physics.Raycast(rayU2, maxDist) || Physics.Raycast(rayU3, maxDist) || Physics.Raycast(rayU4, maxDist)) return false;
+
+            //set up rays from the actual new player
             rayD1 = new Ray(X + NE, Down);
             rayD2 = new Ray(X + NW, Down);
             rayD3 = new Ray(X + SE, Down);
@@ -154,12 +167,15 @@ public class CameraChange : MonoBehaviour
             rayU2 = new Ray(X + NW, Up);
             rayU3 = new Ray(X + SE, Up);
             rayU4 = new Ray(X + SW, Up);
+
+            //check if the change is legal
             if ((Physics.Raycast(rayD1, maxDist) || Physics.Raycast(rayD2, maxDist) || Physics.Raycast(rayD3, maxDist) || Physics.Raycast(rayD4, maxDist)) && !Physics.Raycast(rayU1, maxDist) && !Physics.Raycast(rayU2, maxDist) && !Physics.Raycast(rayU3, maxDist) && !Physics.Raycast(rayU4, maxDist))
             {
-                Debug.Log("true");
                 return true;
             }
         }
+
+        //Same as XZ change
         if (newCamDir == "YZ")
         {
             rayD1 = new Ray(X + NE, Down);
@@ -179,10 +195,13 @@ public class CameraChange : MonoBehaviour
                 return false;
             }
         }
+
+        //If none of the above has returned, return false
         return false;
     }
     private void GetTheHeight()
     {
+        //Setup of variables & rays
         float shortDist=500000;
         float YHeight=0;
         Vector3 Height = playerXZ.transform.position + new Vector3(500, 100, 0);
@@ -190,6 +209,8 @@ public class CameraChange : MonoBehaviour
         rayD2 = new Ray(Height + NW, Down);
         rayD3 = new Ray(Height + SE, Down);
         rayD4 = new Ray(Height + SW, Down);
+        
+        //Check if any of the four rays hit anything, and save whatever is closest to the source of the ray
         if (Physics.Raycast(rayD1, out RaycastHit hitXY1, maxDistance))
         {
             if (Height.y - hitXY1.transform.position.y < shortDist)
@@ -222,6 +243,7 @@ public class CameraChange : MonoBehaviour
                 YHeight = hitXY4.transform.position.y + hitXY4.transform.localScale.y / 2;
             }
         }
+        //Set the players Y-position to be above the closest platform
         if (CamDir == "camXY") playerXY.transform.position = new Vector3(playerXY.transform.position.x, YHeight + 1.2f, playerXY.transform.position.z);
         if (CamDir == "camYZ") playerYZ.transform.position = new Vector3(playerYZ.transform.position.x, YHeight + 1.2f, playerYZ.transform.position.z);
     }
