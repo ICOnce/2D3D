@@ -11,7 +11,6 @@ public class LevelSetup : MonoBehaviour
     private Color XZ = new Color(0, 0, 1);
 
     //Setting private variables with SerializeField so they can be set in the editor
-    //Player refers 
     [SerializeField] private GameObject startPlayer, LevelHolder;
     [SerializeField] private string StartLevel;
 
@@ -27,12 +26,19 @@ public class LevelSetup : MonoBehaviour
         LevelXY.transform.position = new Vector3(0, 0, 500);
         LevelXZ.transform.position = new Vector3(-500, 0, 0);
 
-        //For loops to set the scale & colour of the three levels
+        //Three for loops to set the scale & colour of the three levels
         foreach (Transform child in LevelYZ.transform)
         {
+            //Set the general scale to 500 on the ignored axis
             child.transform.localScale = new Vector3(500, child.transform.localScale.y, child.transform.localScale.z);
+
+            //Change the color of the platforms that can be stood on
             if (child.tag == "Platform" || child.tag == "PlatformYZ") child.GetComponent<Renderer>().material.color = YZ;
-            else if (child.tag == "winner") child.GetChild(0).GetComponent<Renderer>().material.color = YZ;
+
+            //Get the child of "Winner" as "Winner" is an Empty
+            else if (child.tag == "Winner" || child.tag == "Spoke") child.GetChild(0).GetComponent<Renderer>().material.color = YZ;
+
+            //Set color, collision, and smaller stretch on platforms that can not be seen from XY
             else if (child.tag == "PlatformXZ")
             {
                 child.GetComponent<Renderer>().material.color = XZ;
@@ -46,11 +52,12 @@ public class LevelSetup : MonoBehaviour
                 child.transform.localScale = new Vector3(200, child.transform.localScale.y, child.transform.localScale.z);
             }
         }
+        //Repeat above foreach loop
         foreach (Transform child in LevelXY.transform)
         {
             child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 500);
             if (child.tag == "Platform" || child.tag == "PlatformXY") child.GetComponent<Renderer>().material.color = XY;
-            else if (child.tag == "winner") child.GetChild(0).GetComponent<Renderer>().material.color = XY;
+            else if (child.tag == "Winner" || child.tag == "Spoke") child.GetChild(0).GetComponent<Renderer>().material.color = XY;
             if (child.tag == "PlatformXZ")
             {
                 child.GetComponent<Renderer>().material.color = XZ;
@@ -64,12 +71,13 @@ public class LevelSetup : MonoBehaviour
                 child.transform.localScale = new Vector3(child.transform.localScale.x, child.transform.localScale.y, 200);
             }
         }
+        //Repeat above foreach loop
         foreach (Transform child in LevelXZ.transform)
         {
             child.transform.localScale = new Vector3(child.transform.localScale.x, 1, child.transform.localScale.z);
             child.transform.position = new Vector3(child.transform.position.x, 0, child.transform.position.z);
             if (child.tag == "Platform" || child.tag == "PlatformXZ") child.GetComponent<Renderer>().material.color = XZ;
-            else if (child.tag == "winner") child.GetChild(0).GetComponent<Renderer>().material.color = XZ;
+            else if (child.tag == "Winner" || child.tag == "Spoke") child.GetChild(0).GetComponent<Renderer>().material.color = XZ;
             if (child.tag == "PlatformXY")
             {
                 child.GetComponent<Renderer>().material.color = XY;
