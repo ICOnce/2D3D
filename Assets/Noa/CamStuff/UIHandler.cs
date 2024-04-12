@@ -63,6 +63,7 @@ public class UIHandler : MonoBehaviour
 
     public void NextLevel()
     {
+        Debug.Log("WIN");
         SceneManager.LoadScene("Level" + (Level + 1));
     }
 }

@@ -43,7 +43,7 @@ public class Movement : MonoBehaviour
                 topLeft.SetActive(false);
                 topRight.SetActive(false);
                 winBtn.gameObject.SetActive(true);
-                canvas.GetComponent<Canvas>().worldCamera = winCam.GetComponent<Camera>();
+                canvas.GetComponent<Canvas>().worldCamera = winCam.GetComponentInChildren<Camera>();
             }
             if (hit.transform.tag == "Spoke")
             {
